@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+
+echo "To finish configuring TMUX hit <C-b> I"
