@@ -1,4 +1,0 @@
-#!/usr/bin/env zsh
-
-echo "To finish configuring (Neo)vim run vim +PlugInstall"
-

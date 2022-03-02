@@ -1,26 +1,17 @@
-.PHONY: all
+.PHONY: install install_zsh install_tmux install_vim clean
 
-install: setup rmdefault link
-	touch ~/.zshvars
+PREFIX?=$(HOME)
+ZPLUG_HOME=$(PREFIX)/.zplug
 
-link: .zshrc init.vim .vimrc .tmux.conf
-	ln -s .zshrc ~/.zshrc 
-	mkdir -p ~/.config/nvim/ && ln -s init.vim ~/.config/nvim/init.vim
-	ln -s .vimrc ~/.vimrc 
-	ln -s .tmux.conf ~/.tmux.conf 
+install: zshrc vimrc tmux.conf
+	ln -sbf $(shell pwd)/zshrc $(PREFIX)/.zshrc
+	ln -sbf $(shell pwd)/vimrc $(PREFIX)/.vimrc 
+	mkdir -p $(PREFIX)/.config/nvim/ && \
+		ln -sbf $(PREFIX)/.vimrc $(PREFIX)/.config/nvim/init.vim
+	ln -sbf $(shell pwd)/tmux.conf $(PREFIX)/.tmux.conf 
 
-rmdefault:
-	ls -d ~/.zshrc && rm ~/.zshrc
-	ls -d ~/.vimrc && rm ~/.vimrc
-	ls -d ~/.tmux.conf && rm ~/.tmux.conf
-
-setup: link zsh neovim tmux
-
-zsh: link
-	chmod u+x ./zshinstall && ./zshinstall
-
-neovim: link
-	# chmod u+x ./neoviminstall && ./neoviminstall
-
-tmux: link
-	# chmod u+x ./tmuxinstall && ./tmuxinstall
+clean:
+	rm -f $(PREFIX)/.zshrc
+	rm -f $(PREFIX)/.vimrc
+	rm -f $(PREFIX)/.tmux.conf
+	rm -f $(PREFIX)/.tmux
