@@ -1,5 +1,7 @@
 if [[ ! -d ~/.zplug ]]; then
-  git clone https://github.com/zplug/zplug ~/.zplug
+  if ! git clone https://github.com/zplug/zplug ~/.zplug; then
+    exit 1
+  fi
 fi
 
 source ~/.zplug/init.zsh
@@ -38,7 +40,7 @@ if which nvim > /dev/null; then
       curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
                 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
       ln -sfb $HOME/.local/share/nvim/site/autoload/plug.vim ~/.config/nvim/init.vim
-      vim +PlugInstall +qall
+      nvim +PlugInstall +qall
     fi
   fi
 fi
@@ -63,6 +65,16 @@ export ENABLE_CORRECTION="true"
 tabs -2
 export SPACESHIP_BATTERY_SHOW="false"
 
+# Bindkeys
+bindkey "^U"    backward-kill-line
+bindkey "^u"    backward-kill-line
+bindkey "^[l"   down-case-word
+bindkey "^[L"   down-case-word
+bindkey "^[f" forward-word
+bindkey "^[b" backward-word
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
+
 # System Variables
 setopt NULL_GLOB
 export MANPATH="/usr/local/man:$MANPATH"
@@ -83,5 +95,5 @@ if [[ $TERM == xterm ]]; then
   export TERM=xterm-256color
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # FIXME: Use zplug for installation
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.env.zsh ] && source ~/.env.zsh
