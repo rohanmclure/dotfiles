@@ -2,19 +2,14 @@ if [[ ! -d ~/.zplug ]]; then
   if ! git clone https://github.com/zplug/zplug ~/.zplug; then
     exit 1
   fi
+  printf "Install ZSH plugins? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
 fi
 
 source ~/.zplug/init.zsh
-zplug "ohmyzsh/ohmyzsh", use:"lib/key-bindings.zsh"
-zplug "ohmyzsh/ohmyzsh", use:"lib/directories.zsh"
-zplug "ohmyzsh/ohmyzsh", use:"lib/clipboard.zsh"
-zplug "ohmyzsh/ohmyzsh", use:"lib/completion.zsh"
-zplug "ohmyzsh/ohmyzsh", use:"lib/cli.zsh"
-zplug "ohmyzsh/ohmyzsh", use:"lib/functions.zsh"
-zplug "ohmyzsh/ohmyzsh", use:"lib/history.zsh"
-zplug "ohmyzsh/ohmyzsh", use:"lib/termsupport.zsh"
-zplug "ohmyzsh/ohmyzsh", use:"lib/nvm.zsh"
-zplug "ohmyzsh/ohmyzsh", use:"lib/spectrum.zsh"
+zplug "ohmyzsh/ohmyzsh", use:"lib/*.zsh"
 zplug 'plugins/git', from:oh-my-zsh 
 zplug 'plugins/tmux', from:oh-my-zsh 
 zplug 'plugins/dotenv', from:oh-my-zsh 
@@ -22,16 +17,8 @@ zplug 'plugins/heroku', from:oh-my-zsh
 zplug 'zsh-users/zsh-completions', defer:2
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions", defer:2
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug 'spaceship-prompt/spaceship-prompt', as:theme
-
-if ! zplug check --verbose; then
-  printf "Install ZSH plugins? [y/N]: "
-  if read -q; then
-    echo; zplug install
-  fi
-fi
-
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 zplug load
 
 # Developer Variables
@@ -69,11 +56,12 @@ if which tmux > /dev/null; then
 fi
 
 # oh-my-zsh configuration
-export CASE_SENSITIVE="false"
-export HYPHEN_INSENSITIVE="true"
-export ENABLE_CORRECTION="true"
+export CASE_SENSITIVE=false
+export HYPHEN_INSENSITIVE=true
+export ENABLE_CORRECTION=true
 tabs -2
-export SPACESHIP_BATTERY_SHOW="false"
+export SPACESHIP_BATTERY_SHOW=false
+export SPACESHIP_PROMPT_PREFIXES_SHOW=false
 
 # System Variables
 export MANPATH="/usr/local/man:$MANPATH"
@@ -89,6 +77,8 @@ alias la='ls -la'
 alias pd="popd"
 alias vim="nvim"
 alias bim="vim"
+unalias tmux
+alias tmux="tmux -u"
 
 if [[ $TERM == xterm ]]; then
   export TERM=xterm-256color
