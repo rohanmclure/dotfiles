@@ -95,6 +95,6 @@ if [[ $TERM == xterm ]]; then
   export TERM=xterm-256color
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.env.zsh ] && source ~/.env.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh || true
+[ -f ~/.env.zsh ] && source ~/.env.zsh || true
 
