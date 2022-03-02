@@ -42,14 +42,14 @@ export PATH=/usr/local/bin:$PATH
 
 # Also setup vim on launch if not already. Won't update.
 if which nvim > /dev/null; then
-  alias vim="nvim"
   if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
     printf "Install Vim plugins? [y/N]: "
     if read -q; then
       echo
-      curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+      curl -fLo $HOME/.vim/autoload/plug.vim --create-dirs \
                 https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      ln -sfb $HOME/.local/share/nvim/site/autoload/plug.vim ~/.config/nvim/init.vim
+      mkdir -p ~/.local/share/nvim/site/autoload/
+      ln -sfb $HOME/.vim/autoload/plug.vim ~/.local/share/nvim/site/autoload/plug.vim
       nvim +PlugInstall +qall
     fi
   fi
