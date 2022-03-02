@@ -97,3 +97,4 @@ fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.env.zsh ] && source ~/.env.zsh
+
