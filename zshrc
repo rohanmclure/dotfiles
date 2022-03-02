@@ -29,27 +29,30 @@ export PATH=$HOME/.cargo/bin:$PATH
 export PATH=/usr/local/bin:$PATH
 
 # Also setup vim on launch if not already. Won't update.
-if which nvim; then
+if which nvim > /dev/null; then
   alias vim="nvim"
-fi
-if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
-  printf "Install Vim plugins? [y/N]: "
-  if read -q; then
-    echo
-    curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-              https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    vim +PlugInstall +qall
+  if [[ ! -f ~/.local/share/nvim/site/autoload/plug.vim ]]; then
+    printf "Install Vim plugins? [y/N]: "
+    if read -q; then
+      echo
+      curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+                https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      ln -sfb $HOME/.local/share/nvim/site/autoload/plug.vim ~/.config/nvim/init.vim
+      vim +PlugInstall +qall
+    fi
   fi
 fi
 
 # Do the same for TMUX with tpm
-if [[ ! -d ~/.tmux/plugins/tpm ]]; then
-  printf "Install Tmux plugins? [y/N]: "
-  if read -q; then
-    echo
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    export TMUX_PLUGIN_MANAGER_PATH=$HOME/.tmux/plugins/
-    ~/.tmux/plugins/tpm/bin/install_plugins
+if which tmux > /dev/null; then
+  if [[ ! -d ~/.tmux/plugins/tpm ]]; then
+    printf "Install Tmux plugins? [y/N]: "
+    if read -q; then
+      echo
+      git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+      export TMUX_PLUGIN_MANAGER_PATH=$HOME/.tmux/plugins/
+      ~/.tmux/plugins/tpm/bin/install_plugins
+    fi
   fi
 fi
 
@@ -69,6 +72,9 @@ export SYSTEMD_EDITOR="vim"
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Personal aliases
+alias ls='ls --color=auto'
+alias ll='ls -lah'
+alias la='ls -la'
 alias pd="popd"
 alias vim="nvim"
 alias bim="vim"
