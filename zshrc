@@ -5,6 +5,16 @@ if [[ ! -d ~/.zplug ]]; then
 fi
 
 source ~/.zplug/init.zsh
+zplug "ohmyzsh/ohmyzsh", use:"lib/key-bindings.zsh"
+zplug "ohmyzsh/ohmyzsh", use:"lib/directories.zsh"
+zplug "ohmyzsh/ohmyzsh", use:"lib/clipboard.zsh"
+zplug "ohmyzsh/ohmyzsh", use:"lib/completion.zsh"
+zplug "ohmyzsh/ohmyzsh", use:"lib/cli.zsh"
+zplug "ohmyzsh/ohmyzsh", use:"lib/functions.zsh"
+zplug "ohmyzsh/ohmyzsh", use:"lib/history.zsh"
+zplug "ohmyzsh/ohmyzsh", use:"lib/termsupport.zsh"
+zplug "ohmyzsh/ohmyzsh", use:"lib/nvm.zsh"
+zplug "ohmyzsh/ohmyzsh", use:"lib/spectrum.zsh"
 zplug 'plugins/git', from:oh-my-zsh 
 zplug 'plugins/tmux', from:oh-my-zsh 
 zplug 'plugins/dotenv', from:oh-my-zsh 
@@ -65,18 +75,7 @@ export ENABLE_CORRECTION="true"
 tabs -2
 export SPACESHIP_BATTERY_SHOW="false"
 
-# Bindkeys
-bindkey "^U"    backward-kill-line
-bindkey "^u"    backward-kill-line
-bindkey "^[l"   down-case-word
-bindkey "^[L"   down-case-word
-bindkey "^[f" forward-word
-bindkey "^[b" backward-word
-bindkey "^[[1;5D" backward-word
-bindkey "^[[1;5C" forward-word
-
 # System Variables
-setopt NULL_GLOB
 export MANPATH="/usr/local/man:$MANPATH"
 export LANG=en_US.UTF-8
 export EDITOR=nvim
