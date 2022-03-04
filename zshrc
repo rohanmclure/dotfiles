@@ -4,7 +4,9 @@ if [[ ! -d ~/.zplug ]]; then
   fi
   printf "Install ZSH plugins? [y/N]: "
   if read -q; then
-    echo; zplug install
+    echo;
+    source ~/.zplug/init.zsh
+    zplug install
   fi
 fi
 
