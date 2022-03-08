@@ -1,12 +1,8 @@
+FRESH=0
 if [[ ! -d ~/.zplug ]]; then
+  FRESH=1
   if ! git clone https://github.com/zplug/zplug ~/.zplug; then
     exit 1
-  fi
-  printf "Install ZSH plugins? [y/N]: "
-  if read -q; then
-    echo;
-    source ~/.zplug/init.zsh
-    zplug install
   fi
 fi
 
@@ -21,6 +17,14 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug 'spaceship-prompt/spaceship-prompt', as:theme
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
+if [[ $FRESH -ne 0 ]]; then
+  printf "Install ZSH plugins? [y/N]: "
+  if read -q; then
+    echo;
+    zplug install
+  fi
+fi
 zplug load
 
 # Developer Variables

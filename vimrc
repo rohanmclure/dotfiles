@@ -126,8 +126,8 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Latex
 Plug 'lervag/vimtex'
 
-" Email with Himalaya
-Plug 'soywood/himalaya', {'rtp': 'vim'}
+" " Email with Himalaya
+" Plug 'soywood/himalaya', {'rtp': 'vim'}
 
 " Better concealing for Latex
 Plug 'PietroPate/vim-tex-conceal'
