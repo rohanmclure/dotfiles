@@ -86,8 +86,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mileszs/ack.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dbeecham/ctrlp-commandpalette.vim'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'preservim/tagbar'
@@ -363,9 +361,6 @@ let g:lightline#bufferline#clickable = 1
 let g:lightline#bufferline#show_number = 2 " Give me ordinal numbers
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
-" Ctrl+P Scrolling + more results
-let g:ctrlp_match_window = 'results:100'
-
 " Git line number annotations
 highlight link GitGutterChangeLineNr DiffAdd
 highlight link GitGutterAddLineNr DiffChange
@@ -471,17 +466,10 @@ let g:tmuxline_powerline_separators = 0
 " set completeopt=noinsert,menuone,noselect
 
 " Files fuzzy finder
-let g:ctrlp_show_hidden = 1
-nmap <Leader>f :CtrlPMixed<CR>
-
-" Tags fuzzy finder
-nmap <Leader>F :CtrlPTag<CR>
+nmap <Leader>f :FZF<CR>
 
 " Hide Number Gutter
 nmap <Leader>m :set invnumber<CR>
-
-" Commands fuzzy finder
-nmap <Leader>c :CtrlPCommandPalette<cr>
 
 " Project view
 nmap <Leader>d :NERDTreeToggle<CR>
@@ -514,17 +502,9 @@ let g:mkdp_open_ip = ''
 let g:mkdp_echo_preview_url = 0
 let g:mkdp_browser = "firefox"
 
-" Command Palette
-let g:commandPalette = {
-\   'Coc Diagnostics': ':CocDiagnostics<CR>',
-\   'Vim-Obsession record session': ':Obsess<CR>',
-\   'Source environment [file]': ':Dotenv ',
-\   'Make clean': ':make clean<CR>',
-\   'View full path to buffer': '<C-G>',
-\   'VimTeX Table of Contents': ':VimtexTocToggle<CR>'
-\ }
-
-" Coc.nvim setup
+"
+"    Coc.nvim setup
+"
 
 " GoTo code navigation.
 nmap <silent> ga :CocAction<CR>
