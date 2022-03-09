@@ -67,7 +67,7 @@ export HYPHEN_INSENSITIVE=true
 export ENABLE_CORRECTION=true
 tabs -2
 export SPACESHIP_BATTERY_SHOW=false
-export SPACESHIP_PROMPT_PREFIXES_SHOW=false
+export SPACESHIP_PROMPT_PREFIXES_SHOW=true
 
 # System Variables
 export MANPATH="/usr/local/man:$MANPATH"
