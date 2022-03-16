@@ -1,6 +1,3 @@
-# Avoid warnings from Perl on certain hosts
-export LC_ALL=C
-
 FRESH=0
 if [[ ! -d ~/.zplug ]]; then
   FRESH=1
