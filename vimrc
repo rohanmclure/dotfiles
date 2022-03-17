@@ -111,6 +111,7 @@ Plug 'OmniSharp/omnisharp-vim'
 " Multi-entry selection UI. FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'antoinemadec/coc-fzf'
 
 " Visuals
 Plug 'itchyny/lightline.vim'
@@ -467,6 +468,10 @@ let g:tmuxline_powerline_separators = 0
 
 " Files fuzzy finder
 nmap <Leader>f :FZF<CR>
+
+" LSP fuzzy finder
+nmap <Leader>F :CocFzfList<CR>
+nmap <Leader>S :CocFzfList symbols<CR>
 
 " Hide Number Gutter
 nmap <Leader>m :set invnumber<CR>
