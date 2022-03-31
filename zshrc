@@ -77,6 +77,7 @@ export SYSTEMD_EDITOR="vim"
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Personal aliases
+alias less='less -R'
 alias ls='ls --color=auto'
 alias ll='ls -lah'
 alias la='ls -la'

@@ -21,8 +21,6 @@ endif
 " Allow per-project vimrc
 set exrc
 
-" highlight Normal ctermbg=black ctermfg=white
-
 filetype plugin indent on
 set nocompatible
 set noswapfile
@@ -112,6 +110,7 @@ Plug 'OmniSharp/omnisharp-vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'antoinemadec/coc-fzf'
+Plug 'zackhsi/fzf-tags'
 
 " Visuals
 Plug 'itchyny/lightline.vim'
@@ -246,16 +245,13 @@ let g:gruvbox_termcolors = 256
 let g:gruvbox_number_column = 'fg'
 
 " Zen Mode
-autocmd VimEnter * nmap <leader>Z :Goyo <CR>
+autocmd VimEnter * nmap <Leader>Z :Goyo <CR>
 
 " Terminal Mode -> Not working yet
-autocmd VimEnter * nmap <leader>E <C-\><C-n>
+autocmd VimEnter * nmap <Leader>E <C-\><C-n>
 
 " Disable background
-autocmd VimEnter * nmap <leader>B :hi Normal guibg=NONE ctermbg=NONE<CR>
-
-" Mailbox picker
-let g:himalaya_mailbox_picker = 'fzf'
+" autocmd VimEnter * nmap <Leader>B :hi Normal guibg=NONE ctermbg=NONE<CR>
 
 " Minimap
 let g:minimap_highlight_range = 1
@@ -263,11 +259,11 @@ let g:minimap_git_colors = 1
 
 " Vim Debugger
 autocmd VimEnter * :packadd termdebug <CR>
-autocmd VimEnter * nmap <leader>D :Termdebug<Space>
-autocmd VimEnter * nmap <leader>Db :Break <CR>
-autocmd VimEnter * nmap <leader>Dn :Next <CR>
-autocmd VimEnter * nmap <leader>Ds :Step <CR>
-autocmd VimEnter * nmap <leader>Dc :Continue <CR>
+autocmd VimEnter * nmap <Leader>D :Termdebug<Space>
+autocmd VimEnter * nmap <Leader>Db :Break <CR>
+autocmd VimEnter * nmap <Leader>Dn :Next <CR>
+autocmd VimEnter * nmap <Leader>Ds :Step <CR>
+autocmd VimEnter * nmap <Leader>Dc :Continue <CR>
 
 "
 "   Vim Lightline - or how I learned to stop worrying and love buffers
@@ -377,46 +373,48 @@ set hidden
 let mapleader=";"
 
 " Toggle relative line number
-nmap <leader>r :set number! relativenumber! <CR>
+nmap <Leader>r :set number! relativenumber! <CR>
 
 " Quicker spelling correction
-nmap <leader>z 1z=
+nmap <Leader>z 1z=
 
 " Snappy vertical / horizontal splits
-nmap <leader>v :vsp <CR>
-nmap <leader>V :sp <CR>
-nmap <leader>_ <C-w>_
-nmap <leader>\| <C-w>\|
+nmap <Leader>v :vsp <CR>
+nmap <Leader>V :sp <CR>
+nmap <Leader>_ <C-w>_
+nmap <Leader>\| <C-w>\|
 
 " Resize all splits to equal size
-nmap <leader>= <C-w>=
+nmap <Leader>= <C-w>=
 
 " Window navigation
-autocmd VimEnter * nmap <leader>H <C-w>H
-autocmd VimEnter * nmap <leader>J <C-w>J
-autocmd VimEnter * nmap <leader>K <C-w>K
-autocmd VimEnter * nmap <leader>L <C-w>L
-autocmd VimEnter * nmap <leader>h <C-w>h
-autocmd VimEnter * nmap <leader>j <C-w>j
-autocmd VimEnter * nmap <leader>k <C-w>k
-autocmd VimEnter * nmap <leader>l <C-w>l
-autocmd VimEnter * nmap <leader>Q <C-w>q
+autocmd VimEnter * nmap <Leader>H <C-w>H
+autocmd VimEnter * nmap <Leader>J <C-w>J
+autocmd VimEnter * nmap <Leader>K <C-w>K
+autocmd VimEnter * nmap <Leader>L <C-w>L
+autocmd VimEnter * nmap <Leader>h <C-w>h
+autocmd VimEnter * nmap <Leader>j <C-w>j
+autocmd VimEnter * nmap <Leader>k <C-w>k
+autocmd VimEnter * nmap <Leader>l <C-w>l
+autocmd VimEnter * nmap <Leader>Q <C-w>q
 
 " Buffer navigation
-autocmd VimEnter * nmap <leader>p :bp<CR>
-autocmd VimEnter * nmap <leader>n :bn<CR>
-autocmd VimEnter * nmap <leader>q :bp <BAR> bd # <BAR> bn <CR>
-" autocmd VimEnter * nmap <leader>l :ls<CR>
+autocmd VimEnter * nmap <Leader>p :bp<CR>
+autocmd VimEnter * nmap <Leader>n :bn<CR>
+autocmd VimEnter * nmap <Leader>q :bp <BAR> bd # <BAR> bn <CR>
+" autocmd VimEnter * nmap <Leader>l :ls<CR>
 
 " Tag navigation
-autocmd VimEnter * nmap <leader>t g]
-autocmd VimEnter * nmap <leader>P <C-t>
+autocmd VimEnter * nmap <Leader>C :Tags<CR>
+autocmd VimEnter * nmap <Leader>t <Plug>(fzf_tags)
+autocmd VimEnter * nmap <Leader>P <C-t>
+noreabbrev <expr> ts getcmdtype() == ":" && getcmdline() == 'ts' ? 'FZFTselect' : 'ts'
 
 " View tags for this file
-autocmd VimEnter * nmap <leader>b :TagbarToggle<CR>
+autocmd VimEnter * nmap <Leader>B :TagbarToggle<CR>
 
 " Minimap
-autocmd VimEnter * nmap <leader>M :MinimapToggle<CR>
+autocmd VimEnter * nmap <Leader>M :MinimapToggle<CR>
 
 "
 "   Making (Neo)Vim an IDE
@@ -426,7 +424,7 @@ autocmd VimEnter * nmap <leader>M :MinimapToggle<CR>
 " call LaTeXtoUnicode#Init()
 let g:latex_to_unicode = 0
 let g:latex_to_unicode_keymap = 1
-autocmd VimEnter * nmap <leader>u <C-x><C-o><CR>
+autocmd VimEnter * nmap <Leader>u <C-x><C-o><CR>
 
 " Toggle sign column
 " Toggle signcolumn. Works only on vim>=8.0 or NeoVim
@@ -457,14 +455,12 @@ let g:gitgutter_eager = 1
 let g:gitgutter_map_keys = 0
 nmap <Leader>g :GitGutterSignsToggle<CR> :GitGutterLineNrHighlightsToggle<CR>
 
+" Fugitive Configuration
+set diffopt+=vertical
+
 " Tmuxline
 let g:airline#extensions#tmuxline#enabled = 0
 let g:tmuxline_powerline_separators = 0
-
-" Completions
-" let g:deoplete#enable_at_startup = 1
-" autocmd BufEnter * call ncm2#enable_for_buffer()
-" set completeopt=noinsert,menuone,noselect
 
 " Files fuzzy finder
 nmap <Leader>f :FZF<CR>
@@ -472,6 +468,8 @@ nmap <Leader>f :FZF<CR>
 " LSP fuzzy finder
 nmap <Leader>F :CocFzfList<CR>
 nmap <Leader>S :CocFzfList symbols<CR>
+
+nmap <Leader>b :Buffers<CR>
 
 " Hide Number Gutter
 nmap <Leader>m :set invnumber<CR>
@@ -481,8 +479,7 @@ nmap <Leader>d :NERDTreeToggle<CR>
 " autocmd BufEnter * silent NERDTreeMirror
 
 " Global search
-" Not an actual command, just cause vim to type out the prefix
-nmap <Leader>a :Ack!<Space>
+nmap <Leader>a :Ag<CR>
 
 " Julia
 let g:default_julia_version = '1.5.3'
