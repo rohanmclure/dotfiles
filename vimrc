@@ -479,7 +479,7 @@ nmap <Leader>d :NERDTreeToggle<CR>
 " autocmd BufEnter * silent NERDTreeMirror
 
 " Global search
-nmap <Leader>a :Ag<CR>
+nmap <Leader>a :Rg<CR>
 
 " Julia
 let g:default_julia_version = '1.5.3'
