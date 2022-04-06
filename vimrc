@@ -82,8 +82,6 @@ Plug 'godlygeek/tabular'
 Plug 'scrooloose/nerdtree', { 'off' : 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'mileszs/ack.vim'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 Plug 'preservim/tagbar'
@@ -111,6 +109,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'antoinemadec/coc-fzf'
 Plug 'zackhsi/fzf-tags'
+Plug 'jesseleite/vim-agriculture'
 
 " Visuals
 Plug 'itchyny/lightline.vim'
@@ -364,6 +363,9 @@ highlight link GitGutterAddLineNr DiffChange
 highlight link GitGutterDeleteLineNr DiffDelete
 highlight link GitGutterChangeDeleteLineNr DiffChange
 
+" Search Settings
+let g:agriculture#disable_smart_quoting = 1
+
 set hidden
 
 "
@@ -371,6 +373,12 @@ set hidden
 "
 
 let mapleader=";"
+
+" Global searching with ripgrep
+
+nmap <Leader>/ <Plug>AgRawSearch
+vmap <Leader>/ <Plug>AgRawVisualSelection
+nmap <Leader>* <Plug>AgRawWordUnderCursor
 
 " Toggle relative line number
 nmap <Leader>r :set number! relativenumber! <CR>
@@ -409,6 +417,9 @@ autocmd VimEnter * nmap <Leader>C :Tags<CR>
 autocmd VimEnter * nmap <Leader>t <Plug>(fzf_tags)
 autocmd VimEnter * nmap <Leader>P <C-t>
 noreabbrev <expr> ts getcmdtype() == ":" && getcmdline() == 'ts' ? 'FZFTselect' : 'ts'
+
+" Command panel
+autocmd VimEnter * nmap <Leader>c :Commands<CR>
 
 " View tags for this file
 autocmd VimEnter * nmap <Leader>B :TagbarToggle<CR>
@@ -479,7 +490,10 @@ nmap <Leader>d :NERDTreeToggle<CR>
 " autocmd BufEnter * silent NERDTreeMirror
 
 " Global search
-nmap <Leader>a :Rg<CR>
+vmap / y/\V<C-R>=escape(@",'/\')<CR><CR>
+nmap <Leader>/ <Plug>RgRawSearch
+vmap <Leader>/ <Plug>RgRawVisualSelection
+nmap <Leader>* <Plug>RgRawWordUnderCursor
 
 " Julia
 let g:default_julia_version = '1.5.3'
