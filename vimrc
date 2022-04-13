@@ -109,7 +109,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'antoinemadec/coc-fzf'
 Plug 'zackhsi/fzf-tags'
-Plug 'jesseleite/vim-agriculture'
+Plug 'jZhangTk/vim-agriculture'
 
 " Visuals
 Plug 'itchyny/lightline.vim'
@@ -479,6 +479,7 @@ nmap <Leader>f :FZF<CR>
 " LSP fuzzy finder
 nmap <Leader>F :CocFzfList<CR>
 nmap <Leader>S :CocFzfList symbols<CR>
+nmap <Leader>A :CocFzfList actions<CR>
 
 nmap <Leader>b :Buffers<CR>
 
