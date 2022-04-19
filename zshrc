@@ -1,31 +1,30 @@
 FRESH=0
-if [[ ! -d ~/.zplug ]]; then
+if [[ ! -d ~/.zsh-snap ]]; then
   FRESH=1
-  if ! git clone https://github.com/zplug/zplug ~/.zplug; then
-    exit 1
-  fi
+  git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/.zsh-snap
 fi
 
-source ~/.zplug/init.zsh
-zplug "ohmyzsh/ohmyzsh", use:"lib/*.zsh"
-zplug 'plugins/git', from:oh-my-zsh 
-zplug 'plugins/tmux', from:oh-my-zsh 
-zplug 'plugins/dotenv', from:oh-my-zsh 
-zplug 'plugins/heroku', from:oh-my-zsh 
-zplug 'zsh-users/zsh-completions', defer:2
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-autosuggestions", defer:2
-zplug 'spaceship-prompt/spaceship-prompt', as:theme
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+# autoload -Uz compinit
+# compinit
 
 if [[ $FRESH -ne 0 ]]; then
   printf "Install ZSH plugins? [y/N]: "
   if read -q; then
     echo;
-    zplug install
+    mkdir -p ~/.local/bin/
+    curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin
   fi
 fi
-zplug load
+
+source ~/.zsh-snap/znap.zsh
+export STARSHIP_CONFIG=~/.config/starship.toml
+export STARSHIP_CACHE=~/.cache/starship
+znap source ohmyzsh/ohmyzsh lib plugins/{git,tmux,dotenv,heroku,vi-mode}
+znap source zsh-users/zsh-completions
+znap source zsh-users/zsh-autosuggestions
+znap source zsh-users/zsh-syntax-highlighting
+znap eval starship 'starship init zsh --print-full-init'
+znap prompt
 
 # Developer Variables
 export PATH=$HOME/.local/bin:$PATH
@@ -62,12 +61,16 @@ if which tmux > /dev/null; then
 fi
 
 # oh-my-zsh configuration
+export HISTFILE=$HOME/.zsh_history
 export CASE_SENSITIVE=false
 export HYPHEN_INSENSITIVE=true
 export ENABLE_CORRECTION=true
+export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
+export VI_MODE_SET_CURSOR=true
 tabs -2
-export SPACESHIP_BATTERY_SHOW=false
-export SPACESHIP_PROMPT_PREFIXES_SHOW=true
+
+setopt inc_append_history
+setopt share_history
 
 # System Variables
 export MANPATH="/usr/local/man:$MANPATH"
@@ -84,12 +87,28 @@ alias la='ls -la'
 alias pd="popd"
 alias vim="nvim"
 alias bim="vim"
-unalias tmux
+(( ${+aliases[tmux]} )) && unalias tmux
 alias tmux="tmux -u"
 
 if [[ $TERM == xterm ]]; then
   export TERM=xterm-256color
 fi
 
+dots() {
+
+  # Update zsh plugins + manager
+  antibody update
+  antibody bundle < ~/.config/antibody_bundles.txt > ~/.plugins.zsh
+  source ~/.plugins.zsh
+
+  # Update vim plugins
+  nvim +PlugInstall +qall
+
+  # Update tmux plugins
+  ~/.tmux/plugins/tpm/bin/install_plugins
+
+}
+
+# Other things worth sourcing
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh || true
 [ -f ~/.env.zsh ] && source ~/.env.zsh || true
