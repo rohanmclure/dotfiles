@@ -47,6 +47,9 @@ format = "[via](bold) [${symbol}(${version} )]($style)"
 symbol = " "
 format = "[via](bold) [${symbol}(${version} )]($style)"
 
+[hostname]
+format = "[$hostname]($style) [in](bold) "
+
 [hg_branch]
 symbol = " "
 format = "[on](bold) [$symbol$branch]($style) "
@@ -87,3 +90,6 @@ format = "[via](bold) [${symbol}]($style)[(${version} )](bold $style)"
 symbol = " "
 style  = "red"
 format = "[via](bold) [${symbol}]($style)[(${version} )](bold $style)"
+
+[username]
+format = "[$user]($style) [on](bold) "
