@@ -12,7 +12,10 @@ if [[ $FRESH -ne 0 ]]; then
   if read -q; then
     echo;
     mkdir -p ~/.local/bin/
-    curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin
+    (curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin) \
+     || (which cargo > /dev/null && cargo install starship --locked) \
+     || (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh \
+         && cargo install starship --locked)
   fi
 fi
 
@@ -96,10 +99,9 @@ fi
 
 dots() {
 
-  # Update zsh plugins + manager
-  antibody update
-  antibody bundle < ~/.config/antibody_bundles.txt > ~/.plugins.zsh
-  source ~/.plugins.zsh
+  # Check for znap installed correctly and update
+  [ ! -d ~/.zsh-snap ] && \
+    git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/.zsh-snap
 
   # Update vim plugins
   nvim +PlugInstall +qall
@@ -107,6 +109,7 @@ dots() {
   # Update tmux plugins
   ~/.tmux/plugins/tpm/bin/install_plugins
 
+  echo "Reload zsh to get all the goodies. You may need to manually install starship too."
 }
 
 # Other things worth sourcing
