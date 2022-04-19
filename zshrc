@@ -15,7 +15,8 @@ if [[ $FRESH -ne 0 ]]; then
     (curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin) \
      || (which cargo > /dev/null && cargo install starship --locked) \
      || (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh \
-         && cargo install starship --locked)
+         && cargo install starship --locked) \
+     || true
   fi
 fi
 
