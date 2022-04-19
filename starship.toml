@@ -48,6 +48,7 @@ symbol = " "
 format = "[via](bold) [${symbol}(${version} )]($style)"
 
 [hostname]
+style  = "bold dimmed blue"
 format = "[$hostname]($style) [in](bold) "
 
 [hg_branch]
