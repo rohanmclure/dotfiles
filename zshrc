@@ -13,8 +13,8 @@ if [[ $FRESH -ne 0 ]]; then
     echo;
     mkdir -p ~/.local/bin/
     (curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin) \
-     || (which cargo > /dev/null && cargo install starship --locked) \
-     || (curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh \
+     || ( (which cargo > /dev/null \
+           || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh) \
          && cargo install starship --locked) \
      || true
   fi
@@ -27,8 +27,13 @@ znap source ohmyzsh/ohmyzsh lib plugins/{git,tmux,dotenv,heroku,vi-mode}
 znap source zsh-users/zsh-completions
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
-znap eval starship 'starship init zsh --print-full-init'
-znap prompt
+
+if [[ "`uname -m`" = "x86_64" ]]; then
+  znap eval starship 'starship init zsh --print-full-init'
+  znap prompt
+else
+  source <(starship init zsh --print-full-init)
+fi
 
 # Developer Variables
 export PATH=$HOME/.local/bin:$PATH
