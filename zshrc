@@ -20,10 +20,17 @@ if [[ $FRESH -ne 0 ]]; then
   fi
 fi
 
+# History Configuration (before sourcing oh-my-zsh)
+export HISTFILE=$HOME/.zsh_history
+export HISTSIZE=100000
+setopt inc_append_history
+setopt share_history
+
 source ~/.zsh-snap/znap.zsh
 export STARSHIP_CONFIG=~/.config/starship.toml
 export STARSHIP_CACHE=~/.cache/starship
-znap source ohmyzsh/ohmyzsh lib plugins/{git,tmux,dotenv,heroku,vi-mode}
+znap source ohmyzsh/ohmyzsh
+znap source ohmyzsh/ohmyzsh plugins/{git,tmux,dotenv,heroku,vi-mode}
 znap source zsh-users/zsh-completions
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
@@ -70,16 +77,12 @@ if which tmux > /dev/null; then
 fi
 
 # oh-my-zsh configuration
-export HISTFILE=$HOME/.zsh_history
 export CASE_SENSITIVE=false
 export HYPHEN_INSENSITIVE=true
 export ENABLE_CORRECTION=true
 export VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=true
 export VI_MODE_SET_CURSOR=true
 tabs -2
-
-setopt inc_append_history
-setopt share_history
 
 # System Variables
 export MANPATH="/usr/local/man:$MANPATH"
