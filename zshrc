@@ -4,19 +4,22 @@ if [[ ! -d ~/.zsh-snap ]]; then
   git clone --depth 1 -- https://github.com/marlonrichert/zsh-snap.git ~/.zsh-snap
 fi
 
-# autoload -Uz compinit
-# compinit
+export PATH=$HOME/.local/bin:$PATH
 
 if [[ $FRESH -ne 0 ]]; then
   printf "Install ZSH plugins? [y/N]: "
   if read -q; then
     echo;
     mkdir -p ~/.local/bin/
-    (curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin) \
-     || ( (which cargo > /dev/null \
-           || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh) \
-         && cargo install starship --locked) \
-     || true
+
+    if ! which starship > /dev/null; then
+      if [[ "`uname -m`" = "x86_64" ]]; then
+        curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin
+      else
+        (which cargo > /dev/null || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y) \
+         && cargo install starship --locked
+      fi
+    fi
   fi
 fi
 
@@ -26,6 +29,8 @@ export HISTSIZE=100000
 setopt inc_append_history
 setopt share_history
 
+mkdir -p ~/.zsh-plugins
+zstyle ':znap:*' repos-dir ~/.zsh-plugins
 source ~/.zsh-snap/znap.zsh
 export STARSHIP_CONFIG=~/.config/starship.toml
 export STARSHIP_CACHE=~/.cache/starship
@@ -43,7 +48,6 @@ else
 fi
 
 # Developer Variables
-export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.nodejs/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=/usr/local/bin:$PATH
