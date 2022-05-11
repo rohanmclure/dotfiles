@@ -10,6 +10,9 @@ format = "[via](bold) [${symbol}(${version} )]($style)"
 [buf]
 symbol = " "
 
+[c]
+format = "[via](bold) [$name $version]($style)" 
+
 [conda]
 symbol = " "
 
