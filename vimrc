@@ -13,13 +13,21 @@ let &t_8f='[38;2;%lu;%lu;%lum'
 let &t_8b='[48;2;%lu;%lu;%lum'
 set t_AB=^[[48;5;%dm
 set t_AF=^[[38;5;%dm]]]]
+
 if &term =~ '256color'
     " disable background color erase
     set t_ut=
 endif
 
+" Global statusline if supported
+if has('nvim-0.8.0')
+  set laststatus=3
+endif
+
 " Allow per-project vimrc
-set exrc
+if getcwd() =~ '^\($HOME\)'
+  set secure exrc
+endif
 
 filetype plugin indent on
 set nocompatible
@@ -122,6 +130,9 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Latex
 Plug 'lervag/vimtex'
+
+" Rust
+Plug 'rust-lang/rust.vim'
 
 " " Email with Himalaya
 " Plug 'soywood/himalaya', {'rtp': 'vim'}

@@ -90,6 +90,7 @@ tabs -2
 
 # System Variables
 export MANPATH="/usr/local/man:$MANPATH"
+export MANPAGER='nvim +Man!'
 export LANG=en_US.UTF-8
 export EDITOR=nvim
 export SYSTEMD_EDITOR="vim"

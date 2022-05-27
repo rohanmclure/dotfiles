@@ -16,6 +16,9 @@ format = "[via](bold) [$name $version]($style)"
 [conda]
 symbol = " "
 
+[cmake]
+format = "[via](bold) [${symbol}(${version} )]($style)"
+
 [cmd_duration]
 format = "[took](bold) [$duration]($style) "
 
@@ -84,6 +87,7 @@ format = "[via](bold) [${symbol}]($style)[(${version} )](bold $style)"
 symbol = " "
 style  = "208"
 format = "[is](bold) [${symbol}]($style)[(${version} )](bold $style)"
+disabled = true
 
 [python]
 symbol = " "
