@@ -11,7 +11,7 @@ format = "[via](bold) [${symbol}(${version} )]($style)"
 symbol = " "
 
 [c]
-format = "[via](bold) [$name $version]($style)" 
+format = "[via](bold) [$name $version ]($style)" 
 
 [conda]
 symbol = " "
@@ -88,6 +88,9 @@ symbol = " "
 style  = "208"
 format = "[is](bold) [${symbol}]($style)[(${version} )](bold $style)"
 disabled = true
+
+[perl]
+format = "[via](bold) [${symbol}]($style)[(${version} )](bold $style)"
 
 [python]
 symbol = " "
