@@ -25,9 +25,10 @@ if has('nvim-0.8.0')
 endif
 
 " Allow per-project vimrc
-if getcwd() =~ '^\($HOME\)'
-  set secure exrc
-endif
+" if getcwd() =~ '^\($HOME\)'
+"   set secure exrc
+" endif
+set secure exrc
 
 filetype plugin indent on
 set nocompatible
@@ -87,8 +88,7 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-dotenv'
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'godlygeek/tabular'
-Plug 'scrooloose/nerdtree', { 'off' : 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'airblade/vim-gitgutter'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
@@ -97,6 +97,11 @@ Plug 'sainnhe/tmuxline.vim'
 Plug 'junegunn/goyo.vim'
 " Plug 'vimpostor/vim-tpipeline'
 Plug 'zenbro/mirror.vim'
+
+" Org Mode (?!)
+Plug 'jceb/vim-orgmode'
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'nvim-orgmode/orgmode'
 
 " Language server
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -124,9 +129,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'srcery-colors/srcery-vim'
 Plug 'morhetz/gruvbox'
-Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'wfxr/minimap.vim'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Latex
 Plug 'lervag/vimtex'
@@ -239,6 +243,30 @@ set completeopt=menuone,noinsert,noselect
 "     capabilities = capabilities 
 "   }
 " EOF
+
+"
+"   File Navigator
+"
+
+lua << EOF
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+EOF
 
 "
 "   a e s t h e t i c s
@@ -499,8 +527,7 @@ nmap <Leader>b :Buffers<CR>
 nmap <Leader>m :set invnumber<CR>
 
 " Project view
-nmap <Leader>d :NERDTreeToggle<CR>
-" autocmd BufEnter * silent NERDTreeMirror
+nmap <Leader>d :NvimTreeToggle<CR>
 
 " Global search
 vmap / y/\V<C-R>=escape(@",'/\')<CR><CR>
@@ -558,5 +585,20 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Disallow unsafe vimrc commands
-set secure
+"
+"   FZF setup
+"
+
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
