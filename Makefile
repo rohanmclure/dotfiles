@@ -1,4 +1,4 @@
-.PHONY: install install_zsh install_tmux install_vim clean
+.PHONY: all install fix_init_vim clean
 
 PREFIX?=$(HOME)
 ZPLUG_HOME=$(PREFIX)/.zplug
@@ -12,17 +12,32 @@ ifeq ($(UNAME_S),Darwin)
 	LN += -sf
 endif
 
-install: zshrc vimrc tmux.conf starship.toml
-	${LN} $(shell pwd)/zshrc $(PREFIX)/.zshrc
-	${LN} $(shell pwd)/vimrc $(PREFIX)/.vimrc 
+all:
+
+install: $(PREFIX)/.zshrc $(PREFIX)/.vimrc $(PREFIX)/.tmux.conf $(PREFIX)/.config/starship.toml
+
+$(PREFIX)/.zshrc: zshrc
+	${LN} $(shell pwd)/$< $@
+
+$(PREFIX)/.vimrc: vimrc fix_init_vim $(PREFIX)/.config/starship.toml
+	${LN} $(shell pwd)/$< $@
+
+fix_init_vim:
+	# Overwrite init.vim to be a symlink
 	mkdir -p $(PREFIX)/.config/nvim/ && \
+		([ ! -f $(PREFIX)/.config/nvim/init.vim ] || cp $(PREFIX)/.config/nvim/init.vim $(PREFIX)/.config/nvim/init.vim.backup) && \
 		${LN} $(PREFIX)/.vimrc $(PREFIX)/.config/nvim/init.vim
-	${LN} $(shell pwd)/tmux.conf $(PREFIX)/.tmux.conf 
+
+$(PREFIX)/.config/starship.toml: starship.toml
 	mkdir -p $(PREFIX)/.config/ && \
-		${LN} $(shell pwd)/starship.toml $(PREFIX)/.config/
+		${LN} $(shell pwd)/$< $@
+
+$(PREFIX)/.tmux.conf: tmux.conf
+	${LN} $(shell pwd)/$< $@
 
 clean:
 	rm -f $(PREFIX)/.zshrc
 	rm -f $(PREFIX)/.vimrc
+	rm -f $(PREFIX)/.config/nvim/init.vim
+	rm -f $(PREFIX)/.config/starship.toml
 	rm -f $(PREFIX)/.tmux.conf
-	rm -f $(PREFIX)/.tmux
