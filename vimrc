@@ -131,6 +131,8 @@ Plug 'srcery-colors/srcery-vim'
 Plug 'morhetz/gruvbox'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'wfxr/minimap.vim'
+" Plug 'kdheepak/tabline.nvim'
+Plug 'skywind3000/asyncrun.vim'
 
 " Latex
 Plug 'lervag/vimtex'
@@ -342,7 +344,7 @@ let g:lightline = {
       \        'buffers' : 'tabsel'
       \    },
       \    'active': {
-      \        'left': [ [ 'mode', 'paste'],
+      \        'left': [ [ 'mode', 'paste' ],
       \                  [ 'git_status', 'readonly' ],
       \                  [ 'relativepath' ]
       \                ],
@@ -385,7 +387,7 @@ if has('gui_running')
     set guioptions-=e
 endif
 
-set showtabline=2
+set showtabline=0
 
 " Buffers in the tabline - but in the statusline :P
 " let g:lightline#bufferline#filename_modifier=':t'
@@ -414,8 +416,10 @@ set hidden
 
 let mapleader=";"
 
-" Global searching with ripgrep
+" Asynchronous Jobs
+nmap <Leader>a :copen \| :AsyncRun 
 
+" Global searching with ripgrep
 nmap <Leader>/ <Plug>AgRawSearch
 vmap <Leader>/ <Plug>AgRawVisualSelection
 nmap <Leader>* <Plug>AgRawWordUnderCursor
@@ -561,6 +565,9 @@ let g:mkdp_browser = "firefox"
 "
 "    Coc.nvim setup
 "
+
+" Semantic Highlighting
+let g:coc_default_semantic_highlight_groups = 1
 
 " GoTo code navigation.
 nmap <silent> ga :CocAction<CR>
