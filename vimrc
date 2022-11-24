@@ -24,10 +24,6 @@ if has('nvim-0.8.0')
   set laststatus=3
 endif
 
-" Allow per-project vimrc
-" if getcwd() =~ '^\($HOME\)'
-"   set secure exrc
-" endif
 set secure exrc
 
 filetype plugin indent on
@@ -80,6 +76,13 @@ set mouse=a
 
 call plug#begin('~/.vim/plugged/')
 
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [], 'do': [], 'branch': [] })
+endfunction
+
+Plug 'zyedidia/vim-snake'
+
 " Better dev experience
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
@@ -98,28 +101,27 @@ Plug 'junegunn/goyo.vim'
 Plug 'zenbro/mirror.vim'
 
 " Org Mode (?!)
-Plug 'jceb/vim-orgmode'
+Plug 'jceb/vim-orgmode',                  Cond(!exists('g:vscode'))
 
 " Language server
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim',                 Cond(!exists('g:vscode'),    {'branch': 'release'})
 Plug 'josa42/vim-lightline-coc' 
 Plug 'OmniSharp/omnisharp-vim'
 
 " Multi-entry selection UI. FZF
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'antoinemadec/coc-fzf'
-Plug 'zackhsi/fzf-tags'
-Plug 'jZhangTk/vim-agriculture'
+Plug 'junegunn/fzf',                      Cond(!exists('g:vscode'), { 'do': { -> fzf#install() } }),
+Plug 'junegunn/fzf.vim',                  Cond(!exists('g:vscode'))
+Plug 'antoinemadec/coc-fzf',              Cond(!exists('g:vscode'))
+Plug 'zackhsi/fzf-tags',                  Cond(!exists('g:vscode'))
+Plug 'jZhangTk/vim-agriculture',          Cond(!exists('g:vscode'))
 
 " Visuals
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
-Plug 'srcery-colors/srcery-vim'
-Plug 'morhetz/gruvbox'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'wfxr/minimap.vim'
-Plug 'skywind3000/asyncrun.vim'
+Plug 'itchyny/lightline.vim',             Cond(!exists('g:vscode'))
+Plug 'mengelbrecht/lightline-bufferline', Cond(!exists('g:vscode'))
+Plug 'srcery-colors/srcery-vim',          Cond(!exists('g:vscode'))
+Plug 'morhetz/gruvbox',                   Cond(!exists('g:vscode'))
+Plug 'kyazdani42/nvim-web-devicons',      Cond(!exists('g:vscode'))
+Plug 'wfxr/minimap.vim',                  Cond(!exists('g:vscode'))
 
 " Latex
 Plug 'lervag/vimtex'
@@ -127,27 +129,28 @@ Plug 'lervag/vimtex'
 " Rust
 Plug 'rust-lang/rust.vim'
 
-" " Email with Himalaya
-" Plug 'soywood/himalaya', {'rtp': 'vim'}
-
 " Better concealing for Latex
 Plug 'PietroPate/vim-tex-conceal'
 
 " Markdown
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'vim-pandoc/vim-pandoc-syntax'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } } " Autoinstall w/o invoking nodejs
+Plug 'iamcco/markdown-preview.nvim',                                    { 'do': { -> mkdp#util#install() } } " Autoinstall w/o invoking nodejs
 
 " Isabelle
-Plug 'ThreeFx/isabelle.vim', {'branch': 'main'}
-Plug 'ThreeFx/coc-isabelle', {'branch': 'main', 'do': 'yarn install --frozen-lockfile'}
-
-call plug#end()
-
-autocmd Filetype pandoc setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
+Plug 'ThreeFx/isabelle.vim',                                            {'branch': 'main'}
+Plug 'ThreeFx/coc-isabelle',                                            {'branch': 'main', 'do': 'yarn install --frozen-lockfile'}
 
 " Julia
 Plug 'JuliaEditorSupport/julia-vim'
+
+call plug#end()
+
+"
+" File-Triggered formatting, XDG support etc.
+"
+
+autocmd Filetype pandoc setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype julia setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 " PaRSEC
@@ -173,33 +176,10 @@ au BufRead *.dvi sil exe "!xdg-open " . shellescape(expand("%:p")) | bd | let &f
 set completeopt=menuone,noinsert,noselect
 
 "
-"   File Navigator
-"
-
-lua << EOF
-require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  view = {
-    adaptive_size = true,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-      },
-    },
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
-})
-EOF
-
-"
 "   a e s t h e t i c s
 "
 
+if !exists('g:vscode')
 " Gruvbox
 let g:gruvbox_bold = 1
 let g:gruvbox_italic = 1
@@ -211,31 +191,7 @@ set background=dark
 let g:gruvbox_termcolors = 256
 let g:gruvbox_number_column = 'fg'
 
-" Zen Mode
-autocmd VimEnter * nmap <Leader>Z :Goyo <CR>
-
-" Terminal Mode -> Not working yet
-autocmd VimEnter * nmap <Leader>E <C-\><C-n>
-
-" Disable background
-" autocmd VimEnter * nmap <Leader>B :hi Normal guibg=NONE ctermbg=NONE<CR>
-
-" Minimap
-let g:minimap_highlight_range = 1
-let g:minimap_git_colors = 1
-
-" Vim Debugger
-autocmd VimEnter * :packadd termdebug <CR>
-autocmd VimEnter * nmap <Leader>D :Termdebug<Space>
-autocmd VimEnter * nmap <Leader>Db :Break <CR>
-autocmd VimEnter * nmap <Leader>Dn :Next <CR>
-autocmd VimEnter * nmap <Leader>Ds :Step <CR>
-autocmd VimEnter * nmap <Leader>Dc :Continue <CR>
-
-"
-"   Vim Lightline - or how I learned to stop worrying and love buffers
-"
-
+" Lightline
 function! GitGlobal() abort "{{{
     if exists('*FugitiveHead')
         let branch = FugitiveHead()
@@ -291,29 +247,22 @@ let g:lightline = {
       \ }
 call lightline#coc#register()
 
-autocmd VimEnter * nmap <Leader>1 <Plug>lightline#bufferline#go(1)
-autocmd VimEnter * nmap <Leader>2 <Plug>lightline#bufferline#go(2)
-autocmd VimEnter * nmap <Leader>3 <Plug>lightline#bufferline#go(3)
-autocmd VimEnter * nmap <Leader>4 <Plug>lightline#bufferline#go(4)
-autocmd VimEnter * nmap <Leader>5 <Plug>lightline#bufferline#go(5)
-autocmd VimEnter * nmap <Leader>6 <Plug>lightline#bufferline#go(6)
-autocmd VimEnter * nmap <Leader>7 <Plug>lightline#bufferline#go(7)
-autocmd VimEnter * nmap <Leader>8 <Plug>lightline#bufferline#go(8)
-autocmd VimEnter * nmap <Leader>9 <Plug>lightline#bufferline#go(9)
-autocmd VimEnter * nmap <Leader>0 <Plug>lightline#bufferline#go(10)
+" Buffers in the tabline - but in the statusline :P
+" let g:lightline#bufferline#filename_modifier=':t'
+let g:lightline#bufferline#enable_devicons=1
+let g:lightline#bufferline#more_buffers = 1
+let g:lightline#bufferline#shorten_path = 0
+let g:lightline#bufferline#smart_path = 1
+let g:lightline#bufferline#clickable = 1
+let g:lightline#bufferline#show_number = 2 " Give me ordinal numbers
+autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
 
-"
-" tpipeline setup
-"
-
-let g:tpipeline_split = 1
-
-" Force tabline
+" Tabline
 if has('gui_running')
     set guioptions-=e
 endif
 
-set showtabline=0
+set showtabline=2
 
 " Buffers in the tabline - but in the statusline :P
 " let g:lightline#bufferline#filename_modifier=':t'
@@ -324,6 +273,71 @@ let g:lightline#bufferline#smart_path = 1
 let g:lightline#bufferline#clickable = 1
 let g:lightline#bufferline#show_number = 2 " Give me ordinal numbers
 autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
+
+" Minimap
+let g:minimap_highlight_range = 1
+let g:minimap_git_colors = 1
+
+"
+"   File Navigator
+"
+
+lua << EOF
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+EOF
+
+endif " !exists('g:vscode')
+
+"
+"   Key Bindings
+"
+
+let mapleader=";"
+
+" Zen Mode
+if !exists('g:vscode')
+  autocmd VimEnter * nmap <Leader>Z :Goyo <CR>
+else
+  autocmd VimEnter * nmap <Leader>Z <Cmd>call VSCodeNotify('workbench.action.toggleZenMode')<CR>
+endif
+
+" Terminal Mode -> Not working yet
+autocmd VimEnter * nmap <Leader>E <C-\><C-n>
+
+" Vim Debugger
+autocmd VimEnter * :packadd termdebug <CR>
+autocmd VimEnter * nmap <Leader>D :Termdebug<Space>
+autocmd VimEnter * nmap <Leader>Db :Break <CR>
+autocmd VimEnter * nmap <Leader>Dn :Next <CR>
+autocmd VimEnter * nmap <Leader>Ds :Step <CR>
+autocmd VimEnter * nmap <Leader>Dc :Continue <CR>
+
+autocmd VimEnter * nmap <Leader>1 <Plug>lightline#bufferline#go(1)
+autocmd VimEnter * nmap <Leader>2 <Plug>lightline#bufferline#go(2)
+autocmd VimEnter * nmap <Leader>3 <Plug>lightline#bufferline#go(3)
+autocmd VimEnter * nmap <Leader>4 <Plug>lightline#bufferline#go(4)
+autocmd VimEnter * nmap <Leader>5 <Plug>lightline#bufferline#go(5)
+autocmd VimEnter * nmap <Leader>6 <Plug>lightline#bufferline#go(6)
+autocmd VimEnter * nmap <Leader>7 <Plug>lightline#bufferline#go(7)
+autocmd VimEnter * nmap <Leader>8 <Plug>lightline#bufferline#go(8)
+autocmd VimEnter * nmap <Leader>9 <Plug>lightline#bufferline#go(9)
+autocmd VimEnter * nmap <Leader>0 <Plug>lightline#bufferline#go(10)
 
 " Git line number annotations
 highlight link GitGutterChangeLineNr DiffAdd
@@ -344,11 +358,6 @@ let mapleader=";"
 
 " Asynchronous Jobs
 nmap <Leader>a :copen \| :AsyncRun 
-
-" Global searching with ripgrep
-nmap <Leader>/ <Plug>AgRawSearch
-vmap <Leader>/ <Plug>AgRawVisualSelection
-nmap <Leader>* <Plug>AgRawWordUnderCursor
 
 " Toggle relative line number
 nmap <Leader>r :set number! relativenumber! <CR>
@@ -374,7 +383,11 @@ autocmd VimEnter * nmap <Leader>h <C-w>h
 autocmd VimEnter * nmap <Leader>j <C-w>j
 autocmd VimEnter * nmap <Leader>k <C-w>k
 autocmd VimEnter * nmap <Leader>l <C-w>l
-autocmd VimEnter * nmap <Leader>Q <C-w>q
+if !exists('g:vscode')
+  autocmd VimEnter * nmap <Leader>Q <C-w>q
+else
+  autocmd VimEnter * nmap <Leader>Q <Cmd> call VSCodeNotify('workbench.action.closeEditorsInGroup')<CR>
+endif
 
 " Buffer navigation
 autocmd VimEnter * nmap <Leader>p :bp<CR>
@@ -389,13 +402,22 @@ autocmd VimEnter * nmap <Leader>P <C-t>
 noreabbrev <expr> ts getcmdtype() == ":" && getcmdline() == 'ts' ? 'FZFTselect' : 'ts'
 
 " Command panel
-autocmd VimEnter * nmap <Leader>c :Commands<CR>
+if !exists('g:vscode')
+  autocmd VimEnter * nmap <Leader>c :Commands<CR>
+else
+  autocmd VimEnter * nmap <Leader>c <Cmd> call VSCodeNotify('workbench.action.showCommands')<CR>
+endif
 
 " View tags for this file
 autocmd VimEnter * nmap <Leader>B :TagbarToggle<CR>
 
 " Minimap
-autocmd VimEnter * nmap <Leader>M :MinimapToggle<CR>
+if !exists('g:vscode')
+  autocmd VimEnter * nmap <Leader>M :MinimapToggle<CR>
+else
+  autocmd VimEnter * nmap <Leader>M <Cmd> call VSCodeNotify('editor.action.toggleMinimap')<CR>
+
+endif
 
 "
 "   Making (Neo)Vim an IDE
@@ -421,7 +443,11 @@ endfunction
 nmap <Leader>s :call ToggleSignColumn()<CR>
 
 " Toggle tabline
-nmap <Leader>T :execute 'set showtabline=' . (&showtabline ==# 2 ? 0 : 2)<CR>
+if !exists('g:vscode')
+  nmap <Leader>T :execute 'set showtabline=' . (&showtabline ==# 2 ? 0 : 2)<CR>
+else
+  nmap <Leader>T <Cmd> call VSCodeNotify('workbench.action.toggleTabsVisibility')<CR>
+endif
 
 " Git indicators 
 let g:gitgutter_enabled=1
@@ -444,26 +470,48 @@ let g:airline#extensions#tmuxline#enabled = 0
 let g:tmuxline_powerline_separators = 0
 
 " Files fuzzy finder
-nmap <Leader>f :FZF<CR>
+if !exists('g:vscode')
+  nmap <Leader>f :FZF<CR>
+else
+  nmap <Leader>f <Cmd>call VSCodeNotify('workbench.action.quickOpen')<CR>
+endif
 
 " LSP fuzzy finder
 nmap <Leader>F :CocFzfList<CR>
-nmap <Leader>S :CocFzfList symbols<CR>
-nmap <Leader>A :CocFzfList actions<CR>
+if !exists('g:vscode')
+  nmap <Leader>S :CocFzfList symbols<CR>
+  nmap <Leader>A :CocFzfList actions<CR>
+else
+  nmap <Leader>S <Cmd>call VSCodeNotify('workbench.action.showAllSymbols')<CR>
+  nmap <Leader>A <Cmd>call VSCodeNotify('editor.action.quickFix')<CR>
+endif
 
-nmap <Leader>b :Buffers<CR>
+if !exists('g:vscode')
+  nmap <Leader>b :Buffers<CR>
+endif
 
 " Hide Number Gutter
 nmap <Leader>m :set invnumber<CR>
 
 " Project view
-nmap <Leader>d :NvimTreeToggle<CR>
+if !exists('g:vscode')
+  nmap <Leader>d :NvimTreeToggle<CR>
+else
+  nmap <Leader>d <Cmd>call VSCodeNotify('workbench.action.toggleSidebarVisibility')<CR>
+endif
 
 " Global search
-vmap / y/\V<C-R>=escape(@",'/\')<CR><CR>
-nmap <Leader>/ <Plug>RgRawSearch
-vmap <Leader>/ <Plug>RgRawVisualSelection
-nmap <Leader>* <Plug>RgRawWordUnderCursor
+if !exists('g:vscode')
+  vmap / y/\V<C-R>=escape(@",'/\')<CR><CR>
+  nmap <Leader>/ <Plug>RgRawSearch
+  vmap <Leader>/ <Plug>RgRawVisualSelection
+  nmap <Leader>* <Plug>RgRawWordUnderCursor
+else
+  vmap / y/\V<C-R>=escape(@",'/\')<CR><CR>
+  nmap <Leader>/ <Cmd>call VSCodeNotify('workbench.action.findInFiles')<CR>
+  vmap <Leader>/ <Cmd>call VSCodeNotifyVisual('workbench.action.findInFiles', 1)<CR>
+  nmap <Leader>* <Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>') })<CR>
+endif
 
 " Julia
 let g:default_julia_version = '1.5.3'
@@ -496,17 +544,24 @@ let g:mkdp_browser = "firefox"
 let g:coc_default_semantic_highlight_groups = 1
 
 " GoTo code navigation.
-nmap <silent> ga :CocAction<CR>
-nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gp <C-o>
-nmap <silent> gs :call CocActionAsync('showSignatureHelp')<CR>
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent><nowait> gS  :<C-u>CocList -I symbols<cr>
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+if !exists('g:vscode')
+  nmap <silent> ga :CocAction<CR>
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gs :call CocActionAsync('showSignatureHelp')<CR>
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  nnoremap <silent><nowait> gS  :<C-u>CocList -I symbols<cr>
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+else
+  nmap <silent> ga <Cmd>call VSCodeNotify('editor.action.autoFix')<CR>
+  nmap <silent> gd <Cmd> call VSCodeNotify('editor.action.revealDefinition')<CR>
+  nmap <silent> gy <Cmd> call VSCodeNotify('editor.action.goToTypeDefinition')<CR>
+  nmap <silent> gi <Cmd> call VSCodeNotify('editor.action.goToImplementation')<CR>
+  nmap <silent> gr <Cmd> call VSCodeNotify('editor.action.goToReferences')<CR>
+  nnoremap <silent><nowait> gS <Cmd> call VSCodeNotify('editor.action.showAllSymbols')<CR>
+endif
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
