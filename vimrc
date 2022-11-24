@@ -95,27 +95,15 @@ Plug 'roxma/nvim-yarp'
 Plug 'preservim/tagbar'
 Plug 'sainnhe/tmuxline.vim'
 Plug 'junegunn/goyo.vim'
-" Plug 'vimpostor/vim-tpipeline'
 Plug 'zenbro/mirror.vim'
 
 " Org Mode (?!)
 Plug 'jceb/vim-orgmode'
-" Plug 'nvim-treesitter/nvim-treesitter'
-" Plug 'nvim-orgmode/orgmode'
 
 " Language server
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'josa42/vim-lightline-coc' 
 Plug 'OmniSharp/omnisharp-vim'
-
-" Plug 'neovim/nvim-lspconfig'
-" Plug 'hrsh7th/cmp-nvim-lsp'
-" Plug 'hrsh7th/cmp-buffer'
-" Plug 'hrsh7th/cmp-path'
-" Plug 'hrsh7th/cmp-cmdline'
-" Plug 'hrsh7th/nvim-cmp'
-" Plug 'hrsh7th/cmp-vsnip'
-" Plug 'hrsh7th/vim-vsnip'
 
 " Multi-entry selection UI. FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -131,7 +119,6 @@ Plug 'srcery-colors/srcery-vim'
 Plug 'morhetz/gruvbox'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'wfxr/minimap.vim'
-" Plug 'kdheepak/tabline.nvim'
 Plug 'skywind3000/asyncrun.vim'
 
 " Latex
@@ -184,67 +171,6 @@ au BufRead *.dvi sil exe "!xdg-open " . shellescape(expand("%:p")) | bd | let &f
 "
 
 set completeopt=menuone,noinsert,noselect
-
-" lua <<EOF
-"   -- Setup nvim-cmp.
-"   local cmp = require'cmp'
-
-"   cmp.setup({
-"     snippet = {
-"       expand = function(args)
-"         vim.fn["vsnip#anonymous"](args.body) -- Use `vsnip'
-"       end,
-"     },
-"     mapping = {
-"       ['<C-p>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-"       ['<C-n>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-"       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-"       ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-"       ['<C-e>'] = cmp.mapping({
-"         i = cmp.mapping.abort(),
-"         c = cmp.mapping.close(),
-"       }),
-"       ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-"     },
-"     sources = cmp.config.sources({
-"       { name = 'nvim_lsp' },
-"       { name = 'vsnip' }
-"     }, {
-"       { name = 'buffer' },
-"     })
-"   })
-
-"   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-"   cmp.setup.cmdline('/', {
-"     sources = {
-"       { name = 'buffer' }
-"     }
-"   })
-
-"   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-"   cmp.setup.cmdline(':', {
-"     sources = cmp.config.sources({
-"       { name = 'path' }
-"     }, {
-"       { name = 'cmdline' }
-"     })
-"   })
-
-"   -- Setup lspconfig.
-"   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-"   require('lspconfig')['pyright'].setup{
-"     capabilities = capabilities 
-"   }
-"   require('lspconfig')['rust_analyzer'].setup{
-"     capabilities = capabilities 
-"   }
-"   require('lspconfig')['tsserver'].setup{
-"     capabilities = capabilities 
-"   }
-"   require('lspconfig')[''].setup{
-"     capabilities = capabilities 
-"   }
-" EOF
 
 "
 "   File Navigator
