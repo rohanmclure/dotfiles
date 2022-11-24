@@ -501,13 +501,12 @@ else
 endif
 
 " Global search
+vmap / y/\V<C-R>=escape(@",'/\')<CR><CR>
 if !exists('g:vscode')
-  vmap / y/\V<C-R>=escape(@",'/\')<CR><CR>
   nmap <Leader>/ <Plug>RgRawSearch
   vmap <Leader>/ <Plug>RgRawVisualSelection
   nmap <Leader>* <Plug>RgRawWordUnderCursor
 else
-  vmap / y/\V<C-R>=escape(@",'/\')<CR><CR>
   nmap <Leader>/ <Cmd>call VSCodeNotify('workbench.action.findInFiles')<CR>
   vmap <Leader>/ <Cmd>call VSCodeNotifyVisual('workbench.action.findInFiles', 1)<CR>
   nmap <Leader>* <Cmd>call VSCodeNotify('workbench.action.findInFiles', { 'query': expand('<cword>') })<CR>
