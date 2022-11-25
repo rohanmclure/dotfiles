@@ -1,3 +1,5 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 [character]
 success_symbol = "[➜](bold green)"
 error_symbol = "[➜](bold red)"
@@ -5,22 +7,22 @@ vicmd_symbol = "[](bold yellow)"
 
 [aws]
 symbol = "  "
-format = "[via](bold) [${symbol}(${version} )]($style)"
+format = "[via](bold black) [${symbol}(${version} )]($style)"
 
 [buf]
 symbol = " "
 
 [c]
-format = "[via](bold) [$name $version ]($style)" 
+format = "[via](bold black) [$name $version ]($style)" 
 
 [conda]
 symbol = " "
 
 [cmake]
-format = "[via](bold) [${symbol}(${version} )]($style)"
+format = "[via](bold black) [${symbol}(${version} )]($style)"
 
 [cmd_duration]
-format = "[took](bold) [$duration]($style) "
+format = "[took](bold black) [$duration]($style) "
 
 [dart]
 symbol = " "
@@ -30,44 +32,44 @@ read_only = " "
 
 [docker_context]
 symbol = " "
-format = "[via](bold) [${symbol}(${version} )]($style)"
+format = "[via](bold black) [${symbol}(${version} )]($style)"
 
 [elixir]
 symbol = " "
-format = "[via](bold) [${symbol}(${version} )]($style)"
+format = "[via](bold black) [${symbol}(${version} )]($style)"
 
 [elm]
 symbol = " "
-format = "[via](bold) [${symbol}(${version} )]($style)"
+format = "[via](bold black) [${symbol}(${version} )]($style)"
 
 [git_branch]
 symbol = " "
 style  = "purple"
-format = "[on](bold) [$symbol]($style)[$branch ](bold $style)"
+format = "[on](bold black) [$symbol]($style)[$branch ](bold $style)"
 
 [golang]
 symbol = " "
-format = "[via](bold) [${symbol}(${version} )]($style)"
+format = "[via](bold black) [${symbol}(${version} )]($style)"
 
 [haskell]
 symbol = " "
-format = "[via](bold) [${symbol}(${version} )]($style)"
+format = "[via](bold black) [${symbol}(${version} )]($style)"
 
 [hostname]
 style  = "bold dimmed blue"
-format = "[$hostname]($style) [in](bold) "
+format = "[$hostname]($style) [in](bold black) "
 
 [hg_branch]
 symbol = " "
-format = "[on](bold) [$symbol$branch]($style) "
+format = "[on](bold black) [$symbol$branch]($style) "
 
 [java]
 symbol = " "
-format = "[via](bold) [${symbol}(${version} )]($style)"
+format = "[via](bold black) [${symbol}(${version} )]($style)"
 
 [julia]
 symbol = " "
-format = "[via](bold) [${symbol}(${version} )]($style)"
+format = "[via](bold black) [${symbol}(${version} )]($style)"
 
 [memory_usage]
 symbol = " "
@@ -81,7 +83,7 @@ symbol = " "
 [nodejs]
 symbol = " "
 style  = "green"
-format = "[via](bold) [${symbol}]($style)[(${version} )](bold $style)"
+format = "[via](bold black) [${symbol}]($style)[(${version} )](bold $style)"
 
 [package]
 symbol = " "
@@ -90,17 +92,17 @@ format = "[is](bold) [${symbol}]($style)[(${version} )](bold $style)"
 disabled = true
 
 [perl]
-format = "[via](bold) [${symbol}]($style)[(${version} )](bold $style)"
+format = "[via](bold black) [${symbol}]($style)[(${version} )](bold $style)"
 
 [python]
 symbol = " "
 style  = "yellow"
-format = "[via](bold) [${symbol}]($style)[(${version} )](bold $style)"
+format = "[via](bold black) [${symbol}]($style)[(${version} )](bold $style)"
 
 [rust]
 symbol = " "
 style  = "red"
-format = "[via](bold) [${symbol}]($style)[(${version} )](bold $style)"
+format = "[via](bold black) [${symbol}]($style)[(${version} )](bold $style)"
 
 [username]
-format = "[$user]($style) [on](bold) "
+format = "[$user]($style) [on](bold black) "
