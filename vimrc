@@ -390,10 +390,16 @@ else
 endif
 
 " Buffer navigation
-autocmd VimEnter * nmap <Leader>p :bp<CR>
-autocmd VimEnter * nmap <Leader>n :bn<CR>
-autocmd VimEnter * nmap <Leader>q :bp <BAR> bd # <BAR> bn <CR>
-" autocmd VimEnter * nmap <Leader>l :ls<CR>
+if !exists('g:vscode')
+  autocmd VimEnter * nmap <Leader>p :bp<CR>
+  autocmd VimEnter * nmap <Leader>n :bn<CR>
+  autocmd VimEnter * nmap <Leader>q :bp <BAR> bd # <BAR> bn <CR>
+else
+  " Kill this when  editor groups comply more with vi(m) intuitions
+  autocmd VimEnter * nmap <Leader>p <Cmd> call VSCodeNotify('workbench.action.previousEditorInGroup')<CR>
+  autocmd VimEnter * nmap <Leader>n <Cmd> call VSCodeNotify('workbench.action.nextEditorInGroup')<CR>
+  autocmd VimEnter * nmap <Leader>q <Cmd> call VSCodeNotify('workbench.action.closeActiveEditor')<CR>
+endif
 
 " Tag navigation
 autocmd VimEnter * nmap <Leader>C :Tags<CR>
