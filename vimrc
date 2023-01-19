@@ -55,7 +55,7 @@ set expandtab
 " Remove the Vim thingo
 set noshowmode
 
-" Spelling 
+" Spelling
 set spell spelllang=en_au
 
 " Always use horizontal split
@@ -67,7 +67,7 @@ set clipboard=unnamedplus
 " Use tall cmdheight for debugging
 set cmdheight=1
 
-" Also overrides TMUX mouse capture (what I want) 
+" Also overrides TMUX mouse capture (what I want)
 set mouse=a
 
 "
@@ -105,7 +105,7 @@ Plug 'jceb/vim-orgmode',                  Cond(!exists('g:vscode'))
 
 " Language server
 Plug 'neoclide/coc.nvim',                 Cond(!exists('g:vscode'),    {'branch': 'release'})
-Plug 'josa42/vim-lightline-coc' 
+Plug 'josa42/vim-lightline-coc'
 Plug 'OmniSharp/omnisharp-vim'
 
 " Multi-entry selection UI. FZF
