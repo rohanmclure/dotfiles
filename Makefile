@@ -14,7 +14,7 @@ endif
 
 all:
 
-install: $(PREFIX)/.zshrc $(PREFIX)/.vimrc $(PREFIX)/.tmux.conf $(PREFIX)/.config/starship.toml
+install: $(PREFIX)/.zshrc $(PREFIX)/.vimrc $(PREFIX)/.tmux.conf $(PREFIX)/.config/starship.toml $(PREFIX)/.config/bat/config
 
 $(PREFIX)/.zshrc: zshrc
 	${LN} $(shell pwd)/$< $@
@@ -27,6 +27,10 @@ fix_init_vim:
 	mkdir -p $(PREFIX)/.config/nvim/ && \
 		([ ! -f $(PREFIX)/.config/nvim/init.vim ] || cp $(PREFIX)/.config/nvim/init.vim $(PREFIX)/.config/nvim/init.vim.backup) && \
 		${LN} $(PREFIX)/.vimrc $(PREFIX)/.config/nvim/init.vim
+
+$(PREFIX)/.config/bat/config: batrc
+	mkdir -p $(PREFIX)/.config/bat/ && \
+		${LN} $(shell pwd)/$< $@
 
 $(PREFIX)/.config/starship.toml: starship.toml
 	mkdir -p $(PREFIX)/.config/ && \
