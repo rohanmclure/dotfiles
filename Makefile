@@ -14,7 +14,9 @@ endif
 
 all:
 
-install: $(PREFIX)/.zshrc $(PREFIX)/.vimrc $(PREFIX)/.tmux.conf $(PREFIX)/.config/starship.toml $(PREFIX)/.config/bat/config
+install: $(PREFIX)/.zshrc $(PREFIX)/.vimrc $(PREFIX)/.tmux.conf \
+		 $(PREFIX)/.config/starship.toml $(PREFIX)/.config/bat/config \
+		 $(PREFIX)/.gitconfig
 
 $(PREFIX)/.zshrc: zshrc
 	${LN} $(shell pwd)/$< $@
@@ -35,6 +37,9 @@ $(PREFIX)/.config/bat/config: batrc
 $(PREFIX)/.config/starship.toml: starship.toml
 	mkdir -p $(PREFIX)/.config/ && \
 		${LN} $(shell pwd)/$< $@
+
+$(PREFIX)/.gitconfig: gitconfig
+	${LN} $(shell pwd)/$< $@
 
 $(PREFIX)/.tmux.conf: tmux.conf
 	${LN} $(shell pwd)/$< $@
