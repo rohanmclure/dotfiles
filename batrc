@@ -1,3 +1,4 @@
 --italic-text=always
 --pager="less --RAW-CONTROL-CHARS --quit-if-one-screen --mouse"
---theme="gruvbox-light"
+--theme="gruvbox-dark"
+#--theme="gruvbox-$(([ $XDG_CONFIG_HOME/colourscheme = 'dark' ] && echo 'dark') || echo 'light')"
