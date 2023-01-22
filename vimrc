@@ -185,9 +185,14 @@ let g:gruvbox_bold = 1
 let g:gruvbox_italic = 1
 let g:gruvbox_underline = 1
 let g:gruvbox_undercurl = 1
+let g:gruvbox_contrast_dark = "hard"
 let g:gruvbox_contrast_light = "soft"
 colorscheme gruvbox
-set background=light
+if readfile(expand("$XDG_CONFIG_HOME/colourscheme"))[0] == "dark"
+  set background=dark
+else
+  set background=light
+endif
 let g:gruvbox_termcolors = 256
 let g:gruvbox_number_column = 'fg'
 
