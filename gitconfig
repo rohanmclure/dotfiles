@@ -1,0 +1,14 @@
+[core]
+  editor  = nvim
+  pager   = bat
+
+[alias]
+  pop             = stash pop
+  drop            = stash drop
+  dont-send-email = send-email --dry-run
+
+[init]
+	defaultBranch = main
+
+[include]
+  path = ~/.local.gitconfig
