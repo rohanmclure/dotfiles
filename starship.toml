@@ -88,7 +88,7 @@ format = "[via](bold black) [${symbol}]($style)[(${version} )](bold $style)"
 [package]
 symbol = " "
 style  = "208"
-format = "[is](bold) [${symbol}]($style)[(${version} )](bold $style)"
+format = "[is](bold black) [${symbol}]($style)[(${version} )](bold $style)"
 disabled = true
 
 [perl]
