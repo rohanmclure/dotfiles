@@ -64,6 +64,8 @@ if which nvim > /dev/null; then
   fi
 fi
 
+export FZF_BASE=$HOME/.vim/plugged/fzf
+
 # Do the same for TMUX with tpm
 if which tmux > /dev/null; then
   if [[ ! -d ~/.tmux/plugins/tpm ]]; then
