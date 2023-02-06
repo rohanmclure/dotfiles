@@ -196,6 +196,9 @@ endif
 let g:gruvbox_termcolors = 256
 let g:gruvbox_number_column = 'fg'
 
+" Transparent background
+hi Normal guibg=NONE ctermbg=NONE
+
 " Lightline
 function! GitGlobal() abort "{{{
     if exists('*FugitiveHead')
