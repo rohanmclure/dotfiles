@@ -1,7 +1,9 @@
 FROM ubuntu:latest
 
 RUN apt update
-RUN apt install -y build-essential bash zsh libncurses-dev perl neovim tmux make wget git curl fzf
+RUN apt install -y build-essential cmake bash zsh libncurses-dev perl neovim \
+                   tmux make wget git curl bat \
+ && ln -s /usr/bin/batcat /usr/bin/bat
 RUN useradd user \
  && mkdir -p /home/user \
  && chown -R user /home/user \
