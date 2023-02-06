@@ -16,7 +16,7 @@ all:
 
 install: $(PREFIX)/.zshrc $(PREFIX)/.vimrc $(PREFIX)/.tmux.conf \
 		 $(PREFIX)/.config/starship.toml $(PREFIX)/.config/bat/config \
-		 $(PREFIX)/.gitconfig
+		 $(PREFIX)/.gitconfig $(PREFIX)/.config/colourscheme
 
 $(PREFIX)/.zshrc: zshrc
 	${LN} $(shell pwd)/$< $@
@@ -43,6 +43,10 @@ $(PREFIX)/.gitconfig: gitconfig
 
 $(PREFIX)/.tmux.conf: tmux.conf
 	${LN} $(shell pwd)/$< $@
+
+$(PREFIX)/.config/colourscheme:
+	mkdir -p $(PREFIX)/.config/ && \
+		echo "dark" | tee $@ > /dev/null
 
 clean:
 	rm -f $(PREFIX)/.zshrc
