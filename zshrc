@@ -40,12 +40,9 @@ znap source zsh-users/zsh-completions
 znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
 
-if [[ "`uname -m`" = "x86_64" ]]; then
-  znap eval starship 'starship init zsh --print-full-init'
-  znap prompt
-else
-  source <(starship init zsh --print-full-init)
-fi
+znap eval starship 'starship init zsh --print-full-init'
+prompt_starship_precmd
+znap prompt
 
 # Developer Variables
 export PATH=$HOME/.nodejs/bin:$PATH
