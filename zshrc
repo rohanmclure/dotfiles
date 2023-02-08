@@ -41,8 +41,12 @@ znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
 
 znap eval starship 'starship init zsh --print-full-init'
-prompt_starship_precmd
-znap prompt
+if which prompt_starship_precmd > /dev/null; then
+  prompt_starship_precmd 
+  znap prompt
+else
+  source <(starship init zsh --print-full-init)
+fi
 
 # Developer Variables
 export PATH=$HOME/.nodejs/bin:$PATH
