@@ -24,11 +24,9 @@ $(PREFIX)/.zshrc: zshrc
 $(PREFIX)/.vimrc: vimrc fix_init_vim $(PREFIX)/.config/starship.toml
 	${LN} $(shell pwd)/$< $@
 
-fix_init_vim:
-	# Overwrite init.vim to be a symlink
-	mkdir -p $(PREFIX)/.config/nvim/ && \
-		([ ! -f $(PREFIX)/.config/nvim/init.vim ] || cp $(PREFIX)/.config/nvim/init.vim $(PREFIX)/.config/nvim/init.vim.backup) && \
-		${LN} $(PREFIX)/.vimrc $(PREFIX)/.config/nvim/init.vim
+$(PREFIX)/.config/nvim/init.vim:
+	mkdir -p $(PREFIX)/.config/nvim/
+	${LN} $(PREFIX)/.vimrc $@
 
 $(PREFIX)/.config/bat/config: batrc
 	mkdir -p $(PREFIX)/.config/bat/ && \
