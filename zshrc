@@ -13,12 +13,9 @@ if [[ $FRESH -ne 0 ]]; then
     mkdir -p ~/.local/bin/
 
     if ! which starship > /dev/null; then
-      if [[ "`uname -m`" = "x86_64" ]]; then
-        curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin
-      else
-        (which cargo > /dev/null || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y) \
-         && cargo install starship --locked
-      fi
+      curl -sS https://starship.rs/install.sh | sh -s -- -b ~/.local/bin \
+       || (which cargo > /dev/null || curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y) \
+       && cargo install starship --locked
     fi
   fi
 fi
@@ -42,7 +39,7 @@ znap source zsh-users/zsh-syntax-highlighting
 
 znap eval starship 'starship init zsh --print-full-init'
 if which prompt_starship_precmd > /dev/null; then
-  prompt_starship_precmd 
+  prompt_starship_precmd
   znap prompt
 else
   source <(starship init zsh --print-full-init)
