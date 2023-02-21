@@ -14,33 +14,34 @@ endif
 
 all:
 
-install: $(PREFIX)/.zshrc $(PREFIX)/.vimrc $(PREFIX)/.tmux.conf \
-		 $(PREFIX)/.config/starship.toml $(PREFIX)/.config/bat/config \
-		 $(PREFIX)/.gitconfig $(PREFIX)/.config/colourscheme
+TARGETS := $(addprefix $(PREFIX)/,.config/nvim/init.lua .config/nvim/lua .zshrc \
+	   			  .tmux.conf .config/starship.toml .config/bat/config \
+				  .gitconfig .config/colourscheme)
+
+install: $(TARGETS)
 
 $(PREFIX)/.zshrc: zshrc
-	${LN} $(shell pwd)/$< $@
-
-$(PREFIX)/.vimrc: vimrc fix_init_vim $(PREFIX)/.config/starship.toml
-	${LN} $(shell pwd)/$< $@
-
-$(PREFIX)/.config/nvim/init.vim:
-	mkdir -p $(PREFIX)/.config/nvim/
-	${LN} $(PREFIX)/.vimrc $@
+	${LN} $(abspath $<) $@
 
 $(PREFIX)/.config/bat/config: batrc
 	mkdir -p $(PREFIX)/.config/bat/ && \
-		${LN} $(shell pwd)/$< $@
+		${LN} $(abspath $<) $@
+
+$(PREFIX)/.config/nvim/init.lua: NvChad/init.lua
+	${LN} $(abspath $<) $@
+
+$(PREFIX)/.config/nvim/lua: NvChad/lua
+	${LN} $(abspath $<) $@
 
 $(PREFIX)/.config/starship.toml: starship.toml
 	mkdir -p $(PREFIX)/.config/ && \
-		${LN} $(shell pwd)/$< $@
+		${LN} $(abspath $<) $@
 
 $(PREFIX)/.gitconfig: gitconfig
-	${LN} $(shell pwd)/$< $@
+	${LN} $(abspath $<) $@
 
 $(PREFIX)/.tmux.conf: tmux.conf
-	${LN} $(shell pwd)/$< $@
+	${LN} $(abspath $<) $@
 
 $(PREFIX)/.config/colourscheme:
 	mkdir -p $(PREFIX)/.config/ && \
