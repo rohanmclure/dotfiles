@@ -14,9 +14,9 @@ endif
 
 all:
 
-TARGETS := $(addprefix $(PREFIX)/,.config/nvim/init.lua .config/nvim/lua .zshrc \
-	   			  .tmux.conf .config/starship.toml .config/bat/config \
-				  .gitconfig .config/colourscheme)
+TARGETS := $(addprefix $(PREFIX)/,.config/nvim/init.lua .config/nvim/lua/ .zshrc \
+								  							  .tmux.conf .config/starship.toml .config/bat/config \
+								  							  .gitconfig .config/colourscheme)
 
 install: $(TARGETS)
 
@@ -43,13 +43,11 @@ $(PREFIX)/.gitconfig: gitconfig
 $(PREFIX)/.tmux.conf: tmux.conf
 	${LN} $(abspath $<) $@
 
-$(PREFIX)/.config/colourscheme:
-	mkdir -p $(PREFIX)/.config/ && \
-		echo "dark" | tee $@ > /dev/null
-
 clean:
 	rm -f $(PREFIX)/.zshrc
 	rm -f $(PREFIX)/.vimrc
-	rm -f $(PREFIX)/.config/nvim/init.vim
+	rm -f $(PREFIX)/.config/nvim/init.lua
+	rm -rf $(PREFIX)/.config/nvim/lua
+	rm -rf $(PREFIX)/.config/nvim/plugin
 	rm -f $(PREFIX)/.config/starship.toml
 	rm -f $(PREFIX)/.tmux.conf
