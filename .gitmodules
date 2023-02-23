@@ -1,0 +1,4 @@
+[submodule "doom-nvim"]
+	path = doom-nvim
+	url = https://github.com/doom-neovim/doom-nvim/
+	ignore = "dirty"
