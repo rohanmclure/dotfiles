@@ -1,4 +1,4 @@
-.PHONY: all install fix_init_vim clean
+.PHONY: all install clean
 
 PREFIX?=$(HOME)
 ZPLUG_HOME=$(PREFIX)/.zplug
@@ -21,7 +21,7 @@ install: $(PREFIX)/.zshrc $(PREFIX)/.vimrc $(PREFIX)/.tmux.conf \
 $(PREFIX)/.zshrc: zshrc
 	${LN} $(shell pwd)/$< $@
 
-$(PREFIX)/.vimrc: vimrc fix_init_vim $(PREFIX)/.config/starship.toml
+$(PREFIX)/.vimrc: vimrc $(PREFIX)/.config/nvim/init.vim $(PREFIX)/.config/starship.toml
 	${LN} $(shell pwd)/$< $@
 
 $(PREFIX)/.config/nvim/init.vim:
