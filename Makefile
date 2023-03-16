@@ -31,6 +31,7 @@ doom-nvim/config.lua: config.lua
 	${LN} $(abspath $<) $@
 
 ${XDG_CONFIG_HOME}/nvim: doom-nvim doom-nvim/config.lua
+	rm -rf $@
 	${LN} $(abspath $<) $@
 
 ${XDG_CONFIG_HOME}/starship.toml: starship.toml
