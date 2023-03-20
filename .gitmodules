@@ -1,4 +1,5 @@
 [submodule "doom-nvim"]
 	path = doom-nvim
+	branch = personal-config
 	url = git@github.com:rohanmclure/doom-nvim.git
 	ignore = "dirty"
