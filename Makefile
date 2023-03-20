@@ -27,11 +27,7 @@ ${XDG_CONFIG_HOME}/bat/config: batrc
 	mkdir -p ${XDG_CONFIG_HOME}/bat/ && \
 		${LN} $(abspath $<) $@
 
-doom-nvim/config.lua: config.lua
-	${LN} $(abspath $<) $@
-
-${XDG_CONFIG_HOME}/nvim: doom-nvim doom-nvim/config.lua
-	rm -rf $@
+${XDG_CONFIG_HOME}/nvim: doom-nvim
 	${LN} $(abspath $<) $@
 
 ${XDG_CONFIG_HOME}/starship.toml: starship.toml
