@@ -58,6 +58,7 @@ require('packer').startup(
         {'nvim-lua/plenary.nvim'}, -- Required
       }
     }
+    use 'nvim-telescope/telescope-live-grep-args.nvim'
     use {
         "SmiteshP/nvim-navic",
         requires = "neovim/nvim-lspconfig"

@@ -1,6 +1,10 @@
 vim.opt.clipboard = "unnamedplus"
 vim.opt.undofile = true
 
+vim.opt.showmode = false
+vim.opt.swapfile = false
+vim.opt.cursorline = false
+
 vim.opt.number = true
 vim.opt.relativenumber = false
 

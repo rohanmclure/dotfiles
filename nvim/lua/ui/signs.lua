@@ -46,4 +46,4 @@ vim.api.nvim_create_user_command('ToggleCompactSigns',
     vim.cmd('Gitsigns toggle_numhl')
     vim.cmd('Gitsigns toggle_signs')
   end,
-{}) 
+{})

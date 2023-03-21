@@ -6,7 +6,7 @@ require("nest").applyKeymaps {
     { "f", '<cmd>Telescope find_files<CR>' },
     { "S", '<cmd>Telescope symbols<CR>' },
     { "b", '<cmd>Telescope buffers<CR>' },
-    { "/", '<cmd>Telescope live_grep<CR>' },
+    { "/", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>" },
     { "d", '<cmd>NvimTreeToggle<CR>' },
     { "M", '<cmd>MinimapToggle<CR>' },
     { "c", '<cmd>Telescope commands<CR>' },
@@ -43,6 +43,7 @@ require("nest").applyKeymaps {
     { "D", '<cmd>lua vim.lsp.buf.declaration()<CR>' },
     { "r", '<cmd>lua vim.lsp.buf.references()<CR>' },
     { "i", '<cmd>lua vim.lsp.buf.implementation()<CR>' },
+    { "p", '<cmd>pop<CR>' },
   }},
   { "K", '<cmd>lua vim.lsp.buf.hover()<CR>' },
 }
