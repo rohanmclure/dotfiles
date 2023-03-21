@@ -1,6 +1,6 @@
-
 vim.opt.termguicolors = true
 
+-- Gruvbox theme
 vim.g.gruvbox_bold = 1
 vim.g.gruvbox_italic = 1
 vim.g.gruvbox_underline = 1
@@ -10,6 +10,9 @@ vim.g.gruvbox_contrast_light = "soft"
 vim.api.nvim_command("colorscheme gruvbox")
 vim.opt.background = "dark"
 vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
+
+-- No more '~' at a newline
+vim.wo.fillchars='eob: '
 
 require("indent_blankline").setup {
   show_current_context = false,

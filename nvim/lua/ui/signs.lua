@@ -40,3 +40,10 @@ require('gitsigns').setup {
     enable = false
   },
 }
+
+vim.api.nvim_create_user_command('ToggleCompactSigns',
+  function()
+    vim.cmd('Gitsigns toggle_numhl')
+    vim.cmd('Gitsigns toggle_signs')
+  end,
+{}) 
