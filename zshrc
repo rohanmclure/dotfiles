@@ -80,13 +80,6 @@ export SYSTEMD_EDITOR="vim"
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Personal aliases
-alias less='less -R'
-alias ls='ls --color=auto'
-alias ll='ls -lah'
-alias la='ls -la'
-alias pd="popd"
-alias vim="nvim"
-alias bim="vim"
 (( ${+aliases[tmux]} )) && unalias tmux
 alias tmux="tmux -u"
 
