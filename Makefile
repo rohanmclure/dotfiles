@@ -1,8 +1,5 @@
 .PHONY: all install clean
 
-PREFIX?=$(HOME)
-ZPLUG_HOME=$(PREFIX)/.zplug
-
 LN := ln
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
@@ -12,43 +9,31 @@ ifeq ($(UNAME_S),Darwin)
 	LN += -sf
 endif
 
+TARGETS = $(addprefix ${HOME}/,.zshrc .tmux.conf .gitconfig)\
+	  $(addprefix ${XDG_CONFIG_HOME}/,bat/config nvim starship.toml)
+
 all:
 
-install: $(PREFIX)/.zshrc $(PREFIX)/.vimrc $(PREFIX)/.tmux.conf \
-		 $(PREFIX)/.config/starship.toml $(PREFIX)/.config/bat/config \
-		 $(PREFIX)/.gitconfig $(PREFIX)/.config/colourscheme
+${HOME}/.zshrc: zshrc
+	${LN} $(abspath $<) $@
 
-$(PREFIX)/.zshrc: zshrc
-	${LN} $(shell pwd)/$< $@
+${HOME}/.tmux.conf: tmux.conf
+	${LN} $(abspath $<) $@
 
-$(PREFIX)/.vimrc: vimrc $(PREFIX)/.config/nvim/init.vim $(PREFIX)/.config/starship.toml
-	${LN} $(shell pwd)/$< $@
+${HOME}/.gitconfig: gitconfig
+	${LN} $(abspath $<) $@
 
-$(PREFIX)/.config/nvim/init.vim:
-	mkdir -p $(PREFIX)/.config/nvim/
-	${LN} $(PREFIX)/.vimrc $@
+${XDG_CONFIG_HOME}/bat/config: batrc
+	mkdir -p ${XDG_CONFIG_HOME}/bat/ && \
+		${LN} $(abspath $<) $@
 
-$(PREFIX)/.config/bat/config: batrc
-	mkdir -p $(PREFIX)/.config/bat/ && \
-		${LN} $(shell pwd)/$< $@
+${XDG_CONFIG_HOME}/nvim: nvim
+	${LN} $(abspath $<) $@
 
-$(PREFIX)/.config/starship.toml: starship.toml
-	mkdir -p $(PREFIX)/.config/ && \
-		${LN} $(shell pwd)/$< $@
+${XDG_CONFIG_HOME}/starship.toml: starship.toml
+	${LN} $(abspath $<) $@
 
-$(PREFIX)/.gitconfig: gitconfig
-	${LN} $(shell pwd)/$< $@
-
-$(PREFIX)/.tmux.conf: tmux.conf
-	${LN} $(shell pwd)/$< $@
-
-$(PREFIX)/.config/colourscheme:
-	mkdir -p $(PREFIX)/.config/ && \
-		echo "dark" | tee $@ > /dev/null
+install: ${TARGETS}
 
 clean:
-	rm -f $(PREFIX)/.zshrc
-	rm -f $(PREFIX)/.vimrc
-	rm -f $(PREFIX)/.config/nvim/init.vim
-	rm -f $(PREFIX)/.config/starship.toml
-	rm -f $(PREFIX)/.tmux.conf
+	rm -rf ${TARGETS}
