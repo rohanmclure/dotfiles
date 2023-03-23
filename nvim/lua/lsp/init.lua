@@ -9,3 +9,5 @@ local lsp = require('lsp-zero').preset({
 lsp.nvim_workspace()
 
 lsp.setup()
+
+require('lspsaga').setup()
