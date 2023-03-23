@@ -44,10 +44,13 @@ require("nest").applyKeymaps {
     { "p", '<C-o>' },
     { "n", '<C-i>' },
     -- g{t,T} are tab navigation
+    { "<C-p>", '<cmd>Lspsaga diagnostic_jump_prev<CR>' },
+    { "<C-n>", '<cmd>Lspsaga diagnostic_jump_next<CR>' },
     { "N", '<cmd>tabnew<CR>' },
     { "Q", '<cmd>tabclose<CR>' },
     { "g", '<cmd>Lspsaga show_buf_diagnostics<CR>' },
     { "d", '<cmd>Lspsaga goto_definition<CR>' },
+    { "D", '<cmd>lua vim.lsp.buf.declaration()<CR>' },
     { "y", '<cmd>Lspsaga goto_type_definition<CR>' },
     { "f", '<cmd>Lspsaga lsp_finder<CR>' },
     { "r", '<cmd>Telescope lsp_references<CR>' },
@@ -55,5 +58,6 @@ require("nest").applyKeymaps {
     { "i", '<cmd>lua vim.lsp.buf.implementation()<CR>' },
     { "o", '<cmd>Lspsaga outline<CR>' },
   }},
-  { "K", '<cmd>Lspsaga show_cursor_diagnostics<CR>' },
+  { "K", '<cmd>lua vim.lsp.buf.hover()<CR>' },
+  { "H", '<cmd>Lspsaga show_cursor_diagnostics<CR>' },
 }
