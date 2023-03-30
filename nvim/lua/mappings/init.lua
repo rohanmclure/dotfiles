@@ -13,6 +13,8 @@ require("nest").applyKeymaps {
     { "c", '<cmd>Telescope commands<CR>' },
     { "n", '<cmd>BufferLineCycleNext<CR>' },
     { "p", '<cmd>BufferLineCyclePrev<CR>' },
+    { "P", '<cmd>cprev<CR>' },
+    { "N", '<cmd>cnext<CR>' },
     { "g", {
       { "b", '<cmd>Git blame<CR>' },
       { "s", '<cmd>Git status<CR>' },
@@ -34,6 +36,7 @@ require("nest").applyKeymaps {
     { "j", '<cmd>wincmd j<CR>' },
     { "k", '<cmd>wincmd k<CR>' },
     { "l", '<cmd>wincmd l<CR>' },
+    { "=", '<C-w>=' },
     { "v", '<cmd>vsp<CR>' },
     { "V", '<cmd>split<CR>' },
     { "r", '<cmd>set number relativenumber!<CR>' },
