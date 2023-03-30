@@ -53,7 +53,6 @@ require('packer').startup(
       }
     }
     use 'terrortylor/nvim-comment'
-    use 'rmagatti/auto-session'
     use 'LionC/nest.nvim'
     use 'tpope/vim-fugitive'
     use {
@@ -62,6 +61,20 @@ require('packer').startup(
       requires = {
         {"nvim-tree/nvim-web-devicons"},
         {"nvim-treesitter/nvim-treesitter"}
+      }
+    }
+    use {
+      "ThePrimeagen/harpoon",
+      requires = { "nvim-lua/plenary.nvim" }
+    }
+
+    -- Persistence and Projects
+    use 'rmagatti/auto-session'
+    use {
+      'nvim-telescope/telescope-project.nvim',
+      requires = {
+        {'nvim-telescope/telescope.nvim'},              -- Required
+        {'nvim-telescope/telescope-file-browser.nvim'}  -- Optional
       }
     }
 
