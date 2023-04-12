@@ -9,13 +9,15 @@ vim.g.gruvbox_contrast_dark = "hard"
 vim.g.gruvbox_contrast_light = "soft"
 vim.api.nvim_command("colorscheme gruvbox")
 vim.opt.background = "dark"
-vim.cmd("hi Normal guibg=NONE ctermbg=NONE")
-vim.cmd("hi VertSplit guibg=NONE ctermbg=NONE")
-vim.cmd("hi SignColumn guibg=NONE ctermbg=NONE")
-vim.cmd("hi GitSignsAdd guibg=NONE ctermbg=NONE")
-vim.cmd("hi GitSignsChange guibg=NONE ctermbg=NONE")
-vim.cmd("hi GitSignsDelete guibg=NONE ctermbg=NONE")
--- vim.cmd("hi EndofBuffer guifg=NONE guibg=NONE ctermbg=NONE")
+
+vim.cmd [[
+  hi Normal guibg=NONE ctermbg=NONE
+  hi VertSplit guibg=NONE ctermbg=NONE
+  hi SignColumn  guibg=NONE ctermbg=NONE
+  hi GitSignsAdd guifg='#b8bb26' gui=bold guibg=NONE ctermbg=NONE
+  hi GitSignsChange guifg=#8ec07c gui=bold guibg=NONE ctermbg=NONE
+  hi GitSignsDelete guifg='#fb4934' gui=bold guibg=NONE ctermbg=NONE
+]]
 
 require("indent_blankline").setup {
   show_current_context = false,

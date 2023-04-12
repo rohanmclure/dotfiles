@@ -19,6 +19,7 @@ end
 
 require('general.parser')
 require('general.git')
+require('general.commands')
 
 -- Use its default bindings as well
 require('nvim_comment').setup()
