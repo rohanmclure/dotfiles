@@ -10,6 +10,7 @@ vim.g.gruvbox_contrast_light = "soft"
 vim.api.nvim_command("colorscheme gruvbox")
 vim.opt.background = "dark"
 
+-- Transparent Everything
 vim.cmd [[
   hi Normal guibg=NONE ctermbg=NONE
   hi VertSplit guibg=NONE ctermbg=NONE
@@ -17,6 +18,7 @@ vim.cmd [[
   hi GitSignsAdd guifg='#b8bb26' gui=bold guibg=NONE ctermbg=NONE
   hi GitSignsChange guifg=#8ec07c gui=bold guibg=NONE ctermbg=NONE
   hi GitSignsDelete guifg='#fb4934' gui=bold guibg=NONE ctermbg=NONE
+  autocmd BufEnter * set fillchars=eob:\ 
 ]]
 
 require("indent_blankline").setup {
