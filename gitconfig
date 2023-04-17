@@ -12,3 +12,5 @@
 
 [include]
   path = ~/.local.gitconfig
+[remote-hg]
+	hg-git-compat = true
