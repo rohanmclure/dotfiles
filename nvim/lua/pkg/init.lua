@@ -80,6 +80,10 @@ require('packer').startup(
 
     -- UI Components
     use {
+      'startup-nvim/startup.nvim',
+      requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    }
+    use {
       'nvim-tree/nvim-tree.lua',
       requires = {
         'nvim-tree/nvim-web-devicons', -- Optional

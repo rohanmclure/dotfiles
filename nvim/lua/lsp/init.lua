@@ -10,4 +10,5 @@ lsp.nvim_workspace()
 
 lsp.setup()
 
-require('lspsaga').setup()
+require('lspsaga').setup {}
+require('trouble').setup {}
