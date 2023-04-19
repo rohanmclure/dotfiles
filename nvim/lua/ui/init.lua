@@ -31,6 +31,7 @@ vim.g.minimap_auto_start = 0
 vim.g.minimap_auto_start_win_enter = 0
 
 require('ui.fuzzyfinder')
+require('ui.diagnostics')
 require('ui.tabline')
 require('ui.statusline')
 require('ui.explorer')

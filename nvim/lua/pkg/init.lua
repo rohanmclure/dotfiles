@@ -86,6 +86,10 @@ require('packer').startup(
       },
     }
     use 'antosha417/nvim-lsp-file-operations'
+    use {
+      "folke/trouble.nvim",
+      requires = "nvim-tree/nvim-web-devicons"
+    }
     use 'nvim-treesitter/nvim-treesitter'
     use {
       'nvim-telescope/telescope.nvim',
