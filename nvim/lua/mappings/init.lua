@@ -52,6 +52,7 @@ require("nest").applyKeymaps {
     { "r", '<cmd>set number relativenumber!<CR>' },
     { "m", '<cmd>set number!<CR>' },
     { "Z", '<cmd>Lspsaga code_action<CR>' },
+    { "<C-Z>", '<cmd>ZenMode<CR>' },
   }},
   { "g", {
     { "p", '<C-o>' },

@@ -117,6 +117,10 @@ require('packer').startup(
       tag = 'release'
     }
     use 'wfxr/minimap.vim'
+    use {
+      "folke/zen-mode.nvim",
+      requires = { 'folke/twilight.nvim' }
+    }
 
     if packer_bootstrap then
       require('packer').sync()
