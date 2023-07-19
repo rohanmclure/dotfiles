@@ -108,6 +108,10 @@ require('packer').startup(
       requires = 'nvim-tree/nvim-web-devicons' --Required
     }
     use {
+      'tiagovla/scope.nvim',
+      requires = { 'akinsho/bufferline.nvim' }
+    }
+    use {
       'nvim-lualine/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons' } --Optional
     }

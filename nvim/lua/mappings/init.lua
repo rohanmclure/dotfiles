@@ -63,7 +63,7 @@ require("nest").applyKeymaps {
     -- g{t,T} are tab navigation
     { "<C-p>", '<cmd>Lspsaga diagnostic_jump_prev<CR>' },
     { "<C-n>", '<cmd>Lspsaga diagnostic_jump_next<CR>' },
-    { "N", '<cmd>tabnew %<CR>' },
+    { "N", '<cmd>tabnew<CR>' },
     { "Q", '<cmd>tabclose<CR>' },
     { "g", '<cmd>Lspsaga show_buf_diagnostics<CR>' },
     { "d", '<cmd>Lspsaga goto_definition<CR>' },
