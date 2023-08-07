@@ -9,6 +9,6 @@ require'ufo'.setup {
   provider_selector = function(bufnr, filetype, buftype)
     return { 'lsp', 'treesitter' }
   end,
-  close_fold_kinds = { 'imports' }
+  close_fold_kinds = { }
 }
 
