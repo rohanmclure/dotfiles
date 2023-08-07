@@ -17,6 +17,7 @@ if vim.g.vscode ~= nil then
   return
 end
 
+require('general.folds')
 require('general.snippets')
 require('general.parser')
 require('general.git')
