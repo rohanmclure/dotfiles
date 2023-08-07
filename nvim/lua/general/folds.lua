@@ -20,8 +20,8 @@ for _, ls in ipairs(language_servers) do
 end
 
 local ft_map = {
-  c   = { 'lsp', 'indent' },
-  cpp = { 'lsp', 'indent' }
+  -- c   = { 'lsp', 'indent' },
+  -- cpp = { 'lsp', 'indent' }
 }
 
 require'ufo'.setup {
