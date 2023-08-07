@@ -90,7 +90,6 @@ require('packer').startup(
       "folke/trouble.nvim",
       requires = "nvim-tree/nvim-web-devicons"
     }
-    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
     use 'nvim-treesitter/nvim-treesitter'
     use {
       'nvim-telescope/telescope.nvim',
