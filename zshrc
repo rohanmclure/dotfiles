@@ -38,7 +38,7 @@ znap source zsh-users/zsh-autosuggestions
 znap source zsh-users/zsh-syntax-highlighting
 
 znap eval starship 'starship init zsh --print-full-init'
-if which prompt_starship_precmd > /dev/null; then
+if which prompt_starship_precmd > /dev/null 2&> /dev/null; then
   prompt_starship_precmd
   znap prompt
 else
@@ -48,7 +48,6 @@ fi
 # Developer Variables
 export PATH=$HOME/.nodejs/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
-export PATH=/usr/local/bin:$PATH
 
 # Do the same for TMUX with tpm
 if which tmux > /dev/null; then
