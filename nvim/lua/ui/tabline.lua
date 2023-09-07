@@ -3,17 +3,23 @@ local utils = require("utils")
 
 require('bufferline').setup {
   options = {
-    numbers = function(opts)
-      return string.format("%s", opts.id)
-    end,
+    mode = "buffers",
+    themable = true,
+    numbers = "none",
     buffer_close_icon = "",
     modified_icon = "●",
     close_icon = "",
+    show_close_icon = false,
     left_trunc_marker = "",
     right_trunc_marker = "",
-    max_name_length = 20,
+    indicator = {
+        icon = '▎',
+        style = 'icon'
+    },
+    max_name_length = 18,
     max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
-    tab_size = 25,
+    truncate_names = true,
+    tab_size = 18,
     diagnostics = "nvim_lsp",
     diagnostics_indicator = function(_, _, diagnostics_dict, _)
       local s = " "
@@ -34,6 +40,7 @@ require('bufferline').setup {
         toggle_hidden_on_enter = true, -- when you re-enter a hidden group this options re-opens that group so the buffer is visible
       },
       items = {
+        require('bufferline.groups').builtin.pinned:with({ icon = "" })
         -- {
         --   name = "Tests",
         --   auto_close = true,
@@ -79,13 +86,12 @@ require('bufferline').setup {
     },
     show_buffer_icons = true,
     show_buffer_close_icons = true,
-    show_close_icon = false,
     show_tab_indicators = true,
     persist_buffer_sort = true,
-    separator_style = "thin",
+    separator_style = { " ", " " },
     enforce_regular_tabs = false,
     always_show_bufferline = true,
-    sort_by = "directory",
+    -- sort_by = "directory",
     custom_areas = {
       right = function()
         local result = {}
@@ -128,5 +134,5 @@ require('bufferline').setup {
 }
 
 -- Scope buffers by the tab they belong to
-require("scope").setup{}
-require('telescope').load_extension('scope')
+require'scope'.setup{}
+require'telescope'.load_extension('scope')

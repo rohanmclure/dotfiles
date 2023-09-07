@@ -3,7 +3,6 @@ vim.g.mapleader = ';'
 require("nest").applyKeymaps {
   { "<leader>", {
     { "F", '<cmd>Telescope builtin include_extensions=true<CR>' },
-    { "<C-p>", '<cmd>Telescope project<CR>'},
     { "f", '<cmd>Telescope find_files<CR>' },
     { "s", '<cmd>Telescope lsp_document_symbols<CR>' },
     { "S", '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>' },
@@ -24,6 +23,7 @@ require("nest").applyKeymaps {
     { "c", '<cmd>Telescope commands<CR>' },
     { "n", '<cmd>BufferLineCycleNext<CR>' },
     { "p", '<cmd>BufferLineCyclePrev<CR>' },
+    { "<C-p>", '<cmd>BufferLineTogglePin<CR>' },
     { "P", '<cmd>cprev<CR>' },
     { "N", '<cmd>cnext<CR>' },
     { "g", {

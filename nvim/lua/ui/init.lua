@@ -21,6 +21,13 @@ vim.cmd [[
   autocmd BufEnter * set fillchars=eob:\ 
 ]]
 
+-- Only colour the cursor's line number - not the line
+vim.cmd [[
+  hi CursorLineNr guibg=NONE ctermbg=NONE
+  set cursorline
+  set cursorlineopt=number
+]]
+
 require("indent_blankline").setup {
   show_current_context = false,
   show_current_context_start = false,
