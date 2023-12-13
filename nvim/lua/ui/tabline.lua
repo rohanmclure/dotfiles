@@ -9,7 +9,6 @@ require('bufferline').setup {
     buffer_close_icon = "",
     modified_icon = "●",
     close_icon = "",
-    show_close_icon = false,
     left_trunc_marker = "",
     right_trunc_marker = "",
     indicator = {
@@ -24,7 +23,7 @@ require('bufferline').setup {
     diagnostics_indicator = function(_, _, diagnostics_dict, _)
       local s = " "
       for e, n in pairs(diagnostics_dict) do
-        local sym = e == "error" and "  " or (e == "warning" and "  " or "  ")
+        local sym = e == "error" and "  " or (e == "warning" and "  " or " 󰌶 ")
         s = s .. n .. sym
       end
       return s
@@ -124,7 +123,7 @@ require('bufferline').setup {
 
         if info ~= 0 then
           result[4] = {
-            text = "  " .. info,
+            text = " 󰌶 " .. info,
             guifg = "#51afef",
           }
         end

@@ -67,6 +67,7 @@ require("nest").applyKeymaps {
     { "Q", '<cmd>tabclose<CR>' },
     { "g", '<cmd>Lspsaga show_buf_diagnostics<CR>' },
     { "d", '<cmd>Lspsaga goto_definition<CR>' },
+    { "P", '<cmd>Lspsaga peek_definition<CR>' },
     { "D", '<cmd>lua vim.lsp.buf.declaration()<CR>' },
     { "y", '<cmd>Lspsaga goto_type_definition<CR>' },
     { "f", '<cmd>Lspsaga lsp_finder<CR>' },

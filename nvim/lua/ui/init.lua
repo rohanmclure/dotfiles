@@ -28,11 +28,6 @@ vim.cmd [[
   set cursorlineopt=number
 ]]
 
-require("indent_blankline").setup {
-  show_current_context = false,
-  show_current_context_start = false,
-}
-
 vim.g.minimap_width = 10
 vim.g.minimap_auto_start = 0
 vim.g.minimap_auto_start_win_enter = 0
@@ -44,3 +39,5 @@ require('ui.statusline')
 require('ui.explorer')
 require('ui.signs')
 require('ui.zen')
+
+require('ibl').setup () -- indent-blankline
