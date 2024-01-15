@@ -1,3 +1,6 @@
+-- Sign column always on (replace with debounce soon)
+vim.opt.signcolumn = "yes"
+
 require('gitsigns').setup {
   signs = {
     add = {
