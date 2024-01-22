@@ -13,16 +13,6 @@ vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 
-if vim.g.vscode ~= nil then
-  return
-end
-
-require('general.folds')
-require('general.snippets')
-require('general.parser')
-require('general.git')
-require('general.commands')
-
 -- Use its default bindings as well
 require('config-local').setup {
   -- Default configuration (optional)
@@ -33,4 +23,14 @@ require('config-local').setup {
   silent = false,                                            -- Disable plugin messages (Config loaded/ignored)
   lookup_parents = false,                                    -- Lookup config files in parent directories
 }
+
+if vim.g.vscode ~= nil then
+  return
+end
+
+require('general.folds')
+require('general.snippets')
+require('general.parser')
+require('general.git')
+require('general.commands')
 require('nvim_comment').setup()
