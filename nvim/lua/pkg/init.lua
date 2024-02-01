@@ -43,6 +43,14 @@ require('packer').startup(
     use 'LionC/nest.nvim'
     use 'tpope/vim-fugitive'
     use {
+      'NeogitOrg/neogit',
+      requires = {
+        {'nvim-lua/plenary.nvim'},        -- Required
+        {'sindrets/diffview.nvim'},       -- Required
+        {'nvim-telescope/telescope.nvim'} -- Optional
+      }
+    }
+    use {
       "glepnir/lspsaga.nvim",
       requires = {
         {"nvim-tree/nvim-web-devicons"},

@@ -41,3 +41,4 @@ require('ui.signs')
 require('ui.zen')
 
 require('ibl').setup () -- indent-blankline
+require'neogit'.setup {}
