@@ -6,6 +6,11 @@ require("nest").applyKeymaps {
     { "f", '<cmd>Telescope find_files<CR>' },
     { "s", '<cmd>Telescope lsp_document_symbols<CR>' },
     { "S", '<cmd>Telescope lsp_dynamic_workspace_symbols<CR>' },
+    { "G", {
+        { "s", '<cmd>Telescope git_status<CR>' },
+        { "c", '<cmd>Telescope git_commits<CR>' }
+      }
+    },
     { "b", '<cmd>Telescope buffers<CR>' },
     { "J", '<cmd>Telescope jumplist<CR>' },
     { "/", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>" },
