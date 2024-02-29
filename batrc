@@ -1,4 +1,5 @@
 --italic-text=always
+--style=plain
 --paging=never
 --theme="gruvbox-dark"
 --force-colorization
