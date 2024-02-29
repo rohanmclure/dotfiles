@@ -85,6 +85,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # Personal aliases
 (( ${+aliases[tmux]} )) && unalias tmux
 alias tmux="tmux -u"
+which bat > /dev/null 2&> /dev/null && alias cat="bat"
 
 if [[ $TERM == xterm ]]; then
   export TERM=xterm-256color
