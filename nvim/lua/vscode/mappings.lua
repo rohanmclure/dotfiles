@@ -1,6 +1,6 @@
 vim.g.mapleader = ';'
 
-require("nest").applyKeymaps {
+require"nest".applyKeymaps {
   { "<leader>", {
     { "Q", "<cmd>call VSCodeNotify('workbench.action.closeEditorsInGroup')<CR>" },
     { "h", "<cmd>call VSCodeNotify('workbench.action.focusLeftGroup')<CR>" },

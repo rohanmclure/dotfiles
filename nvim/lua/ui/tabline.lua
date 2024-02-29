@@ -134,5 +134,5 @@ require('bufferline').setup {
 }
 
 -- Scope buffers by the tab they belong to
-require'scope'.setup{}
-require'telescope'.load_extension('scope')
+require"scope".setup {}
+require"telescope".load_extension('scope')

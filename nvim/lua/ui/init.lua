@@ -1,7 +1,7 @@
 vim.opt.termguicolors = true
 
 -- Gruvbox theme
-require'gruvbox'.setup {
+require"gruvbox".setup {
   terminal_colors = true,
   undercurl = true,
   underline = true,
@@ -51,4 +51,4 @@ require('ui.explorer')
 require('ui.signs')
 require('ui.zen')
 
-require('ibl').setup () -- indent-blankline
+require"ibl".setup {} -- indent-blankline
