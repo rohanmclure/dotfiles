@@ -96,7 +96,7 @@ require('packer').startup(
         "SmiteshP/nvim-navic",
         requires = "neovim/nvim-lspconfig"
     }
-    use 'morhetz/gruvbox'
+    use 'ellisonleao/gruvbox.nvim'
     use {
       'akinsho/bufferline.nvim',
       requires = 'nvim-tree/nvim-web-devicons' --Required

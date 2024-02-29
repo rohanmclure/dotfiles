@@ -45,6 +45,10 @@ else
   source <(starship init zsh --print-full-init)
 fi
 
+if which zoxide > /dev/null 2&> /dev/null; then
+  eval "$(zoxide init zsh --cmd cd)"
+fi
+
 # Developer Variables
 export PATH=$HOME/.nodejs/bin:$PATH
 export PATH=$HOME/.cargo/bin:$PATH

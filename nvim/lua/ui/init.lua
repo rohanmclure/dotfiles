@@ -1,25 +1,36 @@
 vim.opt.termguicolors = true
 
 -- Gruvbox theme
-vim.g.gruvbox_bold = 1
-vim.g.gruvbox_italic = 1
-vim.g.gruvbox_underline = 1
-vim.g.gruvbox_undercurl = 1
-vim.g.gruvbox_contrast_dark = "hard"
-vim.g.gruvbox_contrast_light = "soft"
+require'gruvbox'.setup {
+  terminal_colors = true,
+  undercurl = true,
+  underline = true,
+  bold      = true,
+  italic = {
+    strings = true,
+    emphasis = true,
+    comments = true,
+    operators = false,
+    folds = true,
+  },
+  strikethrough = true,
+  invert_selection = false,
+  invert_signs = false,
+  invert_tabline = false,
+  invert_intend_guides = false,
+  inverse = false, -- invert background for search, diffs, statuslines and errors
+  contrast = "hard", -- can be "hard", "soft" or empty string
+  palette_overrides = {},
+  overrides = {},
+  dim_inactive = false,
+  transparent_mode = true,
+}
+
 vim.api.nvim_command("colorscheme gruvbox")
 vim.opt.background = "dark"
 
--- Transparent Everything
-vim.cmd [[
-  hi Normal guibg=NONE ctermbg=NONE
-  hi VertSplit guibg=NONE ctermbg=NONE
-  hi SignColumn  guibg=NONE ctermbg=NONE
-  hi GitSignsAdd guifg='#b8bb26' gui=bold guibg=NONE ctermbg=NONE
-  hi GitSignsChange guifg=#8ec07c gui=bold guibg=NONE ctermbg=NONE
-  hi GitSignsDelete guifg='#fb4934' gui=bold guibg=NONE ctermbg=NONE
-  autocmd BufEnter * set fillchars=eob:\ 
-]]
+-- Get rid of pescy EOB characters (~'s)
+vim.cmd [[ autocmd BufEnter * set fillchars=eob:\  ]]
 
 -- Only colour the cursor's line number - not the line
 vim.cmd [[
@@ -41,4 +52,3 @@ require('ui.signs')
 require('ui.zen')
 
 require('ibl').setup () -- indent-blankline
-require'neogit'.setup {}

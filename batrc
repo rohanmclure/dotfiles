@@ -1,3 +1,4 @@
 --italic-text=always
---pager="less --RAW-CONTROL-CHARS --quit-if-one-screen"
+--paging=never
 --theme="gruvbox-dark"
+--force-colorization
