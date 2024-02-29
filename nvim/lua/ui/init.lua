@@ -32,6 +32,10 @@ vim.opt.background = "dark"
 -- Get rid of pescy EOB characters (~'s)
 vim.cmd [[ autocmd BufEnter * set fillchars=eob:\  ]]
 
+-- Fix winbar background not being transparent
+vim.cmd [[ hi WinBar   guibg=NONE ctermbg=NONE ]]
+vim.cmd [[ hi WinBarNC guibg=NONE ctermbg=NONE ]]
+
 -- Only colour the cursor's line number - not the line
 vim.cmd [[
   hi CursorLineNr guibg=NONE ctermbg=NONE
