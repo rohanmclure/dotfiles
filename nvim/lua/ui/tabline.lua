@@ -2,6 +2,12 @@ local utils = require("utils")
 
 
 require('bufferline').setup {
+  highlights = {
+    indicator_selected = {
+      sp = "red",
+      underline = true
+    }
+  },
   options = {
     mode = "buffers",
     themable = true,
@@ -12,8 +18,7 @@ require('bufferline').setup {
     left_trunc_marker = "",
     right_trunc_marker = "",
     indicator = {
-        icon = '▎',
-        style = 'icon'
+        style = 'underline'
     },
     max_name_length = 18,
     max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
@@ -132,6 +137,13 @@ require('bufferline').setup {
     },
   },
 }
+
+vim.cmd([[
+augroup qf
+  autocmd!
+  autocmd FileType qf set nobuflisted
+augroup END
+]])
 
 -- Scope buffers by the tab they belong to
 require"scope".setup {}

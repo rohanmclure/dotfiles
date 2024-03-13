@@ -7,6 +7,10 @@
   drop            = stash drop
   dont-send-email = send-email --dry-run
 
+[pager]
+  show = "bat -l patch"
+  log  = "bat -l patch --pager less"
+
 [init]
 	defaultBranch = main
 

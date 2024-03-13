@@ -28,7 +28,7 @@ format = "[took](bold white) [$duration]($style) "
 symbol = " "
 
 [directory]
-read_only = " "
+read_only = " 🔒"
 
 [docker_context]
 symbol = " "
